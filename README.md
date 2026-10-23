@@ -18,15 +18,15 @@ Este repositório documenta a primeira base técnica desse conceito. O que exist
 
 ### 🌐 Apresentação e demonstração
 
-Abra a [página do projeto](index.html) para conhecer o conceito e o estágio atual.
+**[Acesse a página do projeto](https://agonisingbasher.github.io/stardew-valley-wiiu/)** para conhecer o conceito e o estágio atual.
 
 **[▶ Abrir o PREVIEW interativo](preview/index.html)** — clone o repositório e abra `preview/index.html` em um navegador. A demonstração funciona sem servidor.
 
 O preview foi testado com testes de integração que simulam o DOM e o canvas; isso não substitui uma validação visual em um navegador real. Ele roda no computador e **não** é um executável de Wii U nem uma medição de desempenho do console.
 
-### Publicar a página no GitHub Pages
+### GitHub Pages
 
-Abra **Settings → Pages**, escolha **Deploy from a branch**, selecione a branch `main` e a pasta `/(root)`, e salve. O arquivo `index.html` será a página inicial; o botão **Abrir o PREVIEW** leva a `preview/index.html`.
+A página do projeto já está publicada no GitHub Pages: **[agonisingbasher.github.io/stardew-valley-wiiu](https://agonisingbasher.github.io/stardew-valley-wiiu/)**. O botão **Abrir o PREVIEW** leva à demonstração interativa.
 
 ---
 
