@@ -45,6 +45,7 @@
       text-decoration: none;
     }
     .back-link:hover { background: var(--panel-light); }
+    .header-links { display: flex; flex-wrap: wrap; gap: 10px; }
     .layout { display: grid; grid-template-columns: 1.55fr 1fr; gap: 24px; }
     .screen { overflow: hidden; padding: 14px; border: 1px solid var(--line); border-radius: 14px; background: linear-gradient(145deg, var(--panel-light), var(--panel)); }
     canvas { display: block; width: 100%; border-radius: 7px; background: #070e13; image-rendering: pixelated; }
@@ -84,7 +85,10 @@
         <h1>Primeiros passos na fazenda</h1>
         <small>v0.1 · demonstração de exploração no navegador</small>
       </div>
-      <a class="back-link" href="../index.html">← Voltar à página principal</a>
+      <div class="header-links">
+        <a class="back-link" href="../index.html">← Voltar à página principal</a>
+        <a class="back-link" href="https://agonisingbasher.github.io/personal-website/">Outros projetos ↗</a>
+      </div>
     </header>
     <div id="preview-unavailable" class="note" role="status" hidden><strong>Não foi possível carregar os recursos do preview.</strong> Verifique se o pacote foi clonado e extraído por completo; consulte o <a href="../README.md">README</a> para instruções.</div>
     <div id="preview-player">
