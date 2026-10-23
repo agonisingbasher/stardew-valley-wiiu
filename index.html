@@ -45,13 +45,9 @@
     .button:hover { transform: translateY(-2px); background: var(--panel-light); }
     .button-primary { border-color: var(--green); background: var(--green); color: #17231e; }
     .button-primary:hover { background: #bce891; }
-    .banner { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 18px 0 48px; padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: linear-gradient(145deg, #22372a, #17231e 70%); box-shadow: 0 22px 70px #0005; }
-    .concept-screen { min-height: 150px; display: flex; flex-direction: column; justify-content: space-between; padding: 18px; border: 1px solid #53664d; border-radius: 11px; background: linear-gradient(160deg, #304c35, #1b2a21); }
-    .concept-screen:last-child { background: linear-gradient(160deg, #3d4931, #24291f); }
-    .concept-screen span { color: var(--gold); font-size: .75rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
-    .concept-screen strong { font-size: clamp(1.25rem, 3vw, 2rem); }
-    .concept-screen small { color: var(--muted); }
-    .caption { grid-column: 1 / -1; margin: 0; color: var(--muted); font-size: .85rem; }
+    .banner { margin: 18px 0 48px; overflow: hidden; border: 1px solid var(--line); border-radius: 16px; background: #17231e; box-shadow: 0 22px 70px #0005; }
+    .banner img { display: block; width: 100%; height: auto; }
+    .caption { margin: 0; padding: 11px 16px; color: var(--muted); font-size: .85rem; }
     .facts { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0 0 68px; border: 1px solid var(--line); border-radius: 13px; background: #17211c; }
     .fact { padding: 18px 22px; }
     .fact + .fact { border-left: 1px solid var(--line); }
@@ -84,8 +80,6 @@
       .topbar { align-items: flex-start; flex-direction: column; }
       .hero { padding-top: 30px; }
       .facts, .cards { grid-template-columns: 1fr; }
-      .banner { grid-template-columns: 1fr; }
-      .caption { grid-column: auto; }
       .fact + .fact { border-top: 1px solid var(--line); border-left: 0; }
       .controls { grid-template-columns: repeat(2, 1fr); }
       .status-table th, .status-table td { padding: 10px 7px; font-size: .88rem; }
@@ -120,11 +114,10 @@
         </div>
       </section>
 
-      <div class="banner" aria-label="Esboço conceitual das duas telas">
-        <div class="concept-screen"><span>TV · tela principal</span><strong>Explorar a fazenda</strong><small>Cenário e movimento do jogador</small></div>
-        <div class="concept-screen"><span>GamePad · tela touch</span><strong>Mapa e informações</strong><small>Uma segunda tela com função própria</small></div>
-        <p class="caption">Esboço visual criado em HTML/CSS. Imagens e recursos extraídos do jogo não são incluídos na publicação deste repositório.</p>
-      </div>
+      <figure class="banner">
+        <img src="docs/banner.png" alt="Conceito de Stardew Valley no Wii U com a fazenda na TV e o mapa e inventário no GamePad" width="1024" height="576">
+        <figcaption class="caption">Banner provisório do projeto; algumas funções mostradas ainda são conceitos.</figcaption>
+      </figure>
 
       <div class="facts" aria-label="Resumo da versão">
         <div class="fact"><strong>v0.1</strong><span>primeira base experimental</span></div>
@@ -162,7 +155,7 @@
         <table class="status-table">
           <thead><tr><th>Área</th><th>Evidência e limite</th></tr></thead>
           <tbody>
-            <tr><td>Leitura do mapa</td><td>O protótipo local leu um arquivo tBIN10 de 80 × 65 blocos, seis camadas e quatro tilesets; os dados extraídos não são distribuídos neste repositório.</td></tr>
+            <tr><td>Leitura do mapa</td><td>O arquivo tBIN10 de 80 × 65 blocos, seis camadas e quatro tilesets foi lido e convertido para o protótipo.</td></tr>
             <tr><td>Núcleo C++</td><td>Testado no computador para colisão, limites, normalização diagonal e posição inicial válida.</td></tr>
             <tr><td>Preview</td><td>Teste de integração com DOM/canvas simulados cobre movimento, reinício, troca de tela, limites e perda de foco.</td></tr>
             <tr><td>Console Wii U</td><td>Código inicial baseado em WUT existe, mas não foi compilado nem testado no console nesta entrega.</td></tr>
@@ -176,13 +169,13 @@
         <h2>O que ainda falta construir</h2>
         <p class="section-lead">Inventário touch permanente, arrastar e soltar, mapa com NPCs em tempo real, relacionamentos, calendário, previsão do tempo e Off-TV Play são propostas futuras — não funções disponíveis na v0.1.</p>
         <div class="callout"><strong>Importante:</strong> esta demonstração é executada no navegador de um computador. Não é um port jogável, um executável de Wii U nem um benchmark do console. A fazenda aparece sem construções e objetos dinâmicos; agricultura, áudio, eventos e salvamento também não estão implementados.</div>
-        <p class="section-lead">O código nativo depende da toolchain devkitPro/WUT e dos recursos locais, que não são distribuídos neste repositório. Recursos visuais e nomes enviados podem corresponder a versões diferentes do jogo; compatibilidade ampla ainda não foi verificada.</p>
+        <p class="section-lead">O código nativo depende da toolchain devkitPro/WUT. Recursos visuais e nomes enviados podem corresponder a versões diferentes do jogo; compatibilidade ampla ainda não foi verificada.</p>
       </section>
 
       <section id="controles">
         <div class="section-label">Experimente</div>
         <h2>Controles do preview</h2>
-        <p class="section-lead">O preview jogável requer os recursos locais gerados pelo projeto. O repositório público não inclui esses arquivos; a página do preview explica essa limitação.</p>
+        <p class="section-lead">Abra a demonstração completa direto no navegador; os recursos gerados acompanham o repositório.</p>
         <ul class="controls">
           <li><kbd>Setas</kbd> / <kbd>WASD</kbd> — mover</li>
           <li><kbd>Shift</kbd> — correr</li>
@@ -196,7 +189,7 @@
       <div class="bottom-cta">
         <div>
           <h2>Quer explorar a fazenda?</h2>
-          <p>Veja o preview local ou as instruções disponíveis no repositório.</p>
+          <p>Abra a demonstração interativa da versão v0.1.</p>
         </div>
         <a class="button button-primary" href="preview/index.html">▶ Abrir o PREVIEW</a>
       </div>

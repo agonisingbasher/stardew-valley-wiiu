@@ -8,7 +8,7 @@
   <img alt="Linguagem nativa" src="https://img.shields.io/badge/C%2B%2B-prot%C3%B3tipo-00599C?style=for-the-badge&logo=cplusplus&logoColor=white">
 </p>
 
-> **Um protótipo de exploração, não um port de Stardew Valley.** Este laboratório experimental estuda como uma adaptação para Wii U poderia aproveitar a TV e o GamePad. A versão local v0.1 reconstrói uma fazenda a partir de arquivos fornecidos, com movimento, câmera, colisão aproximada e simulação de segunda tela. Este repositório público contém código e documentação, mas não redistribui imagens, mapas ou outros recursos extraídos do jogo.
+> **Um protótipo de exploração, não um port de Stardew Valley.** Este laboratório experimental estuda como uma adaptação para Wii U poderia aproveitar a TV e o GamePad. A versão v0.1 reconstrói uma fazenda a partir dos assets do projeto, com movimento, câmera, colisão aproximada e simulação de segunda tela.
 
 ## 🚀 Sobre o projeto
 
@@ -20,13 +20,13 @@ Este repositório documenta a primeira base técnica desse conceito. O que exist
 
 Abra a [página do projeto](index.html) para conhecer o conceito e o estágio atual.
 
-**[▶ Abrir o PREVIEW](preview/index.html)** — no pacote local completo, abra `preview/index.html` em um navegador. O clone público não inclui os recursos extraídos e mostra um aviso no lugar da demonstração interativa.
+**[▶ Abrir o PREVIEW interativo](preview/index.html)** — clone o repositório e abra `preview/index.html` em um navegador. A demonstração funciona sem servidor.
 
 O preview foi testado com testes de integração que simulam o DOM e o canvas; isso não substitui uma validação visual em um navegador real. Ele roda no computador e **não** é um executável de Wii U nem uma medição de desempenho do console.
 
 ### Publicar a página no GitHub Pages
 
-Abra **Settings → Pages**, escolha **Deploy from a branch**, selecione a branch `main` e a pasta `/(root)`, e salve. O arquivo `index.html` será a página inicial; o botão **Abrir o PREVIEW** leva a `preview/index.html`, que explica por que a demonstração completa não está incluída no site público.
+Abra **Settings → Pages**, escolha **Deploy from a branch**, selecione a branch `main` e a pasta `/(root)`, e salve. O arquivo `index.html` será a página inicial; o botão **Abrir o PREVIEW** leva a `preview/index.html`.
 
 ---
 
@@ -36,13 +36,13 @@ Abra **Settings → Pages**, escolha **Deploy from a branch**, selecione a branc
 |:---:|:---:|
 | Exploração da fazenda | Mapa e informações |
 
-O banner fornecido fica apenas no pacote local; ele e os recursos visuais extraídos do jogo não são publicados neste repositório. O site usa um esboço próprio em HTML/CSS para apresentar a ideia sem redistribuir esses materiais.
+O banner provisório está em `docs/banner.png`. Alguns recursos ainda são conceitos, não funções implementadas.
 
 ---
 
 ## 🎯 O que a v0.1 já faz
 
-* 🗺️ **Reconstrói o mapa da fazenda:** a leitura local validou um mapa tBIN10 de 80 × 65 blocos, com seis camadas e quatro tilesets; arquivos extraídos e convertidos não são distribuídos aqui.
+* 🗺️ **Reconstrói o mapa da fazenda:** leitura do mapa tBIN10 de 80 × 65 blocos, com seis camadas e quatro tilesets.
 * 🚶 **Permite explorar o cenário:** movimento em oito direções, câmera acompanhando o avatar temporário e colisão aproximada.
 * 🖥️ **Simula a segunda tela:** alternância entre mapa e jogo no GamePad do preview; no código C++ inicial, a saída é desenhada para TV e GamePad.
 * 🧰 **Mantém ferramentas reproduzíveis:** scripts para preparar os arquivos selecionados, interpretar o mapa e construir os recursos da demonstração.
@@ -58,7 +58,7 @@ Inventário permanente na tela touch, arrastar e soltar, NPCs em movimento no ma
 
 | Área | Estado nesta versão |
 |---|---|
-| Mapa e recursos | O mapa fornecido foi lido e convertido localmente; animações são representadas pelo primeiro frame no preview. Os arquivos do jogo não são incluídos no repositório público. |
+| Mapa e recursos | O mapa do projeto foi lido e convertido; animações são representadas pelo primeiro frame no preview. |
 | Movimento e colisão | O núcleo C++ foi testado no computador para colisão, limites, movimento diagonal e posição inicial. A colisão é aproximada. |
 | Preview de navegador | Testes com DOM/canvas simulados cobrem movimento, reinício, alternância de tela, limites e perda de foco. Não houve validação visual automatizada em navegador real. |
 | Código nativo Wii U | Existe código C++ inicial baseado em WUT, com entrada do GamePad e saída nas duas telas. **Não foi compilado nem testado em um Wii U nesta entrega.** |
@@ -85,7 +85,7 @@ Os arquivos enviados incluem código descompilado identificado como versão 1.5.
 
 ## ▶️ Executar o preview
 
-No pacote local completo, abra `preview/index.html` no navegador. O clone público não inclui `preview/scene-data.js` nem os recursos visuais; nessa situação, a página explica a limitação em vez de tentar carregar um preview incompleto.
+Clone o projeto completo e abra `preview/index.html` no navegador. Os dados e imagens do preview estão incluídos neste repositório.
 
 | Controle | Ação |
 |---|---|
@@ -107,7 +107,7 @@ cd native
 make
 ```
 
-O alvo do Makefile é `stardew_explorer_v01.rpx`. A compilação depende da toolchain configurada e dos arquivos gerados localmente em `native/data/`, que não são distribuídos. Não foi validada nesta entrega e **este repositório não inclui um RPX pré-compilado**.
+O alvo do Makefile é `stardew_explorer_v01.rpx`. A compilação depende da toolchain configurada. Não foi validada nesta entrega e **este repositório não inclui um RPX pré-compilado**.
 
 Controles previstos no código nativo: analógico esquerdo/direcional para mover, A para correr, Y para alternar mapa/jogo no GamePad, X para reiniciar e + para sair.
 
@@ -115,7 +115,7 @@ Controles previstos no código nativo: analógico esquerdo/direcional para mover
 
 ## 🧰 Reproduzir a conversão de recursos
 
-Para gerar os recursos locais, use Python com Pillow, Node e uma cópia do ZIP original da parte 1 obtida legitimamente:
+Para reproduzir a conversão de recursos, use Python com Pillow, Node e o ZIP original da parte 1:
 
 ```sh
 npm ci
@@ -140,10 +140,10 @@ node tests/viewer_test.cjs
 ## 🗂️ Estrutura do projeto
 
 ```text
-assets/       recursos derivados gerados localmente; ignorados pelo Git
-docs/         diretório local do banner, não publicado
-native/       código C++ inicial e Makefile para Wii U; dados ignorados pelo Git
-preview/      demonstração no navegador; cena gerada localmente e não publicada
+assets/       recursos convertidos e dados do mapa
+docs/         banner provisório da apresentação
+native/       código C++ inicial, dados e Makefile para Wii U
+preview/      demonstração interativa no navegador
 tests/        testes do núcleo e do viewer
 tools/        ferramentas de extração, leitura e conversão
 index.html    página de apresentação do projeto
@@ -163,7 +163,7 @@ index.html    página de apresentação do projeto
 
 ## 📚 Fontes, créditos e aviso
 
-* **Stardew Valley** e os recursos visuais relacionados pertencem aos seus respectivos titulares. Este repositório público exclui arquivos de jogo, mapas, sprites, banner e cenas com imagens incorporadas. A publicação do código não concede direitos de redistribuição de materiais de terceiros.
+* **Stardew Valley** e os materiais originais relacionados pertencem aos seus respectivos titulares. Os assets deste protótipo foram fornecidos pelo desenvolvedor para este repositório; isso não implica afiliação, endosso ou licença sobre a propriedade intelectual de terceiros.
 * Projeto experimental e não oficial, sem vínculo ou endosso da ConcernedApe ou de outros titulares de direitos.
 * [xnb.js](https://github.com/lybell-art/xnb-js) — LGPL-3.0-or-later; dependência indicada em `package-lock.json`.
 * [Formato tBIN — referência](https://github.com/colinvella/tIDE/blob/master/TileMapEditor/xTile/Format/TbinFormat.cs).
