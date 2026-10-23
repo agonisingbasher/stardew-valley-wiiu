@@ -1,0 +1,20 @@
+# Game-derived content stays local; public redistribution is not included.
+/assets/
+/native/data/
+/preview/scene-data.js
+/docs/banner.png
+/work/
+
+# Native build outputs.
+/native/build/
+/native/*.elf
+/native/*.rpx
+/native/*.map
+/native/*.o
+/native/*.d
+
+# Local test/build outputs.
+/core_test
+/core_test.exe
+__pycache__/
+*.py[cod]

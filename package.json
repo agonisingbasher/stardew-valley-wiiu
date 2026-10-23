@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "xnb": "^1.3.0-a"
+  },
+  "name": "stardew-wiiu-exploration-lab",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Asset conversion and exploration proof of concept for Wii U development"
+}
