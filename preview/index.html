@@ -75,44 +75,159 @@
       header { align-items: flex-start; flex-direction: column; }
       .bar { font-size: 12px; }
     }
+    .language-toggle { min-height: 44px; padding: 9px 15px; border: 1px solid var(--line); border-radius: 9px; background: var(--panel); color: var(--text); font: inherit; font-weight: 700; cursor: pointer; }
+    .language-toggle:hover { border-color: var(--green); background: var(--panel-light); }
   </style>
 </head>
 <body>
   <main>
     <header>
       <div>
-        <div class="badge">Felipe Alexandre · laboratório homebrew</div>
-        <h1>Primeiros passos na fazenda</h1>
-        <small>v0.1 · demonstração de exploração no navegador</small>
+        <div class="badge" data-i18n="badge">Felipe Alexandre · laboratório homebrew</div>
+        <h1 data-i18n="heading">Primeiros passos na fazenda</h1>
+        <small data-i18n="subtitle">v0.1 · demonstração de exploração no navegador</small>
       </div>
       <div class="header-links">
-        <a class="back-link" href="../index.html">← Voltar à página principal</a>
-        <a class="back-link" href="https://agonisingbasher.github.io/personal-website/">Outros projetos ↗</a>
+        <a class="back-link" href="../index.html" data-i18n="backLink">← Voltar à página principal</a>
+        <a class="back-link" href="https://agonisingbasher.github.io/personal-website/" data-i18n="otherProjects">Outros projetos ↗</a>
+        <button class="language-toggle" type="button" aria-label="Switch to English">EN</button>
       </div>
     </header>
-    <div id="preview-unavailable" class="note" role="status" hidden><strong>Não foi possível carregar os recursos do preview.</strong> Verifique se o pacote foi clonado e extraído por completo; consulte o <a href="../README.md">README</a> para instruções.</div>
+    <div id="preview-unavailable" class="note" role="status" hidden><strong data-i18n="unavailableTitle">Não foi possível carregar os recursos do preview.</strong> <span data-i18n="unavailableText">Verifique se o pacote foi clonado e extraído por completo; consulte o</span> <a href="../README.md" data-i18n="readme">README</a> <span data-i18n="unavailableEnd">para instruções.</span></div>
     <div id="preview-player">
       <div class="layout">
         <section class="screen">
-          <div class="bar"><span>TV · cenário principal</span><span>Mapa original extraído</span></div>
-          <canvas id="tv" width="960" height="540" tabindex="0" aria-label="Fazenda explorável com setas ou WASD"></canvas>
+          <div class="bar"><span data-i18n="tvLabel">TV · cenário principal</span><span data-i18n="mapLabel">Mapa original extraído</span></div>
+          <canvas id="tv" width="960" height="540" tabindex="0" aria-label="Fazenda explorável com setas ou WASD" data-i18n-aria-label="tvCanvasLabel"></canvas>
         </section>
         <section class="screen">
-          <div class="bar"><span>GamePad · simulação</span><span id="modeLabel">Mapa</span></div>
-          <canvas id="pad" width="854" height="480" aria-label="Simulação da tela do GamePad"></canvas>
+          <div class="bar"><span data-i18n="gamepadLabel">GamePad · simulação</span><span id="modeLabel" data-i18n="mapMode">Mapa</span></div>
+          <canvas id="pad" width="854" height="480" aria-label="Simulação da tela do GamePad" data-i18n-aria-label="gamepadCanvasLabel"></canvas>
         </section>
       </div>
       <div class="controls">
-        <button id="reset">Reiniciar posição (R)</button>
-        <button id="mode">Alternar mapa / jogo (M)</button>
-        <button id="debug">Mostrar colisões (C)</button>
+        <button id="reset" data-i18n="resetButton">Reiniciar posição (R)</button>
+        <button id="mode" data-i18n="modeButton">Alternar mapa / jogo (M)</button>
+        <button id="debug" data-i18n="debugButton">Mostrar colisões (C)</button>
       </div>
-      <p class="muted"><kbd>Setas / WASD</kbd> mover · <kbd>Shift</kbd> correr · <kbd>R</kbd> reiniciar · controle padrão: analógico esquerdo / direcional, A correr, Y alternar tela</p>
+      <p class="muted"><kbd data-i18n="arrows">Setas</kbd> / <kbd>WASD</kbd> <span data-i18n="move">mover</span> · <kbd>Shift</kbd> <span data-i18n="run">correr</span> · <kbd>R</kbd> <span data-i18n="restart">reiniciar</span> · <span data-i18n="gamepadControls">controle padrão: analógico esquerdo / direcional, A correr, Y alternar tela</span></p>
       <div id="status" class="status">Carregando recursos…</div>
     </div>
-    <div class="note"><strong>Escopo desta versão:</strong> mapa estático, câmera, avatar e colisão aproximada. Abigail é o avatar temporário de teste. Casa, construções e objetos dinâmicos ainda não foram montados; a fazenda aparece vazia. Agricultura, inventário, áudio, transições e salvamento ainda não estão implementados. Esta visualização não mede o desempenho no Wii U.</div>
+    <div class="note"><strong data-i18n="scopeTitle">Escopo desta versão:</strong> <span data-i18n="scopeText">mapa estático, câmera, avatar e colisão aproximada. Abigail é o avatar temporário de teste. Casa, construções e objetos dinâmicos ainda não foram montados; a fazenda aparece vazia. Agricultura, inventário, áudio, transições e salvamento ainda não estão implementados. Esta visualização não mede o desempenho no Wii U.</span></div>
   </main>
   <script>
+    const previewTranslations = {
+      en: {
+        title: "Stardew Wii U · lab v0.1",
+        badge: "Felipe Alexandre · homebrew lab",
+        heading: "First steps on the farm",
+        subtitle: "v0.1 · browser exploration demo",
+        backLink: "← Back to main page",
+        otherProjects: "Other projects ↗",
+        languageButtonLabel: "Switch to Brazilian Portuguese",
+        unavailableTitle: "Could not load preview assets.",
+        unavailableText: "Make sure the full package was cloned and extracted; see the",
+        unavailableEnd: "for instructions.",
+        readme: "README",
+        tvLabel: "TV · main scene", mapLabel: "Original extracted map",
+        tvCanvasLabel: "Explorable farm using arrow keys or WASD",
+        gamepadLabel: "GamePad · simulation", gamepadCanvasLabel: "GamePad screen simulation",
+        mapMode: "Map", gameMode: "Game",
+        resetButton: "Reset position (R)", modeButton: "Toggle map / game (M)",
+        debugButton: "Show collisions (C)", arrows: "Arrows", move: "move",
+        run: "run", restart: "restart",
+        gamepadControls: "default controls: left stick / D-pad, A to run, Y to switch screens",
+        loading: "Loading assets…", loadError: "Failed to load images. Reopen the full package.",
+        status: (x, y, width, height) => `Tile ${x}, ${y} · ${width} × ${height} · audio pending · temporary avatar`,
+        scopeTitle: "Current scope:",
+        scopeText: "static map, camera, avatar, and approximate collision. Abigail is a temporary test avatar. The farmhouse, buildings, and dynamic objects have not been added; the farm appears empty. Farming, inventory, audio, transitions, and saving are not implemented. This view does not measure Wii U performance."
+      },
+      "pt-BR": {
+        title: "Stardew Wii U · laboratório v0.1",
+        badge: "Felipe Alexandre · laboratório homebrew",
+        heading: "Primeiros passos na fazenda",
+        subtitle: "v0.1 · demonstração de exploração no navegador",
+        backLink: "← Voltar à página principal",
+        otherProjects: "Outros projetos ↗",
+        languageButtonLabel: "Mudar para inglês",
+        unavailableTitle: "Não foi possível carregar os recursos do preview.",
+        unavailableText: "Verifique se o pacote foi clonado e extraído por completo; consulte o",
+        unavailableEnd: "para instruções.",
+        readme: "README",
+        tvLabel: "TV · cenário principal", mapLabel: "Mapa original extraído",
+        tvCanvasLabel: "Fazenda explorável com setas ou WASD",
+        gamepadLabel: "GamePad · simulação", gamepadCanvasLabel: "Simulação da tela do GamePad",
+        mapMode: "Mapa", gameMode: "Jogo",
+        resetButton: "Reiniciar posição (R)", modeButton: "Alternar mapa / jogo (M)",
+        debugButton: "Mostrar colisões (C)", arrows: "Setas", move: "mover",
+        run: "correr", restart: "reiniciar",
+        gamepadControls: "controle padrão: analógico esquerdo / direcional, A correr, Y alternar tela",
+        loading: "Carregando recursos…", loadError: "Falha ao carregar imagens. Reabra o pacote completo.",
+        status: (x, y, width, height) => `Bloco ${x}, ${y} · ${width} × ${height} · áudio pendente · avatar temporário`,
+        scopeTitle: "Escopo desta versão:",
+        scopeText: "mapa estático, câmera, avatar e colisão aproximada. Abigail é o avatar temporário de teste. Casa, construções e objetos dinâmicos ainda não foram montados; a fazenda aparece vazia. Agricultura, inventário, áudio, transições e salvamento ainda não estão implementados. Esta visualização não mede o desempenho no Wii U."
+      }
+    };
+    const languageStorageKey = "stardew-wiiu-language";
+    const requestedLanguage = new URLSearchParams(window.location.search).get("lang");
+    let previewLanguage = requestedLanguage === "en" || requestedLanguage === "pt-BR"
+      ? requestedLanguage
+      : "pt-BR";
+    if (requestedLanguage !== "en" && requestedLanguage !== "pt-BR") {
+      try {
+        const storedLanguage = localStorage.getItem(languageStorageKey);
+        if (storedLanguage === "en" || storedLanguage === "pt-BR") {
+          previewLanguage = storedLanguage;
+        }
+      } catch (error) {
+        if (error.name !== "SecurityError") throw error;
+      }
+    }
+    window.PREVIEW_TEXT = previewTranslations[previewLanguage];
+    window.setPreviewLanguage = (language) => {
+      previewLanguage = language;
+      window.PREVIEW_TEXT = previewTranslations[language];
+      document.documentElement.lang = language;
+      document.title = window.PREVIEW_TEXT.title;
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        element.textContent = window.PREVIEW_TEXT[element.dataset.i18n];
+      });
+      document.querySelectorAll("[data-i18n-aria-label]").forEach((element) => {
+        element.setAttribute("aria-label", window.PREVIEW_TEXT[element.dataset.i18nAriaLabel]);
+      });
+      const modeLabel = document.getElementById("modeLabel");
+      modeLabel.textContent = window.PREVIEW_TEXT[
+        window.PROTOTYPE && window.PROTOTYPE.mode ? "gameMode" : "mapMode"
+      ];
+      const status = document.getElementById("status");
+      if (status.dataset.state === "error") {
+        status.textContent = window.PREVIEW_TEXT.loadError;
+      } else if (!window.PROTOTYPE) {
+        status.textContent = window.PREVIEW_TEXT.loading;
+      }
+      const languageButton = document.querySelector(".language-toggle");
+      languageButton.textContent = language === "en" ? "PT-BR" : "EN";
+      languageButton.setAttribute("aria-label", language === "en"
+        ? previewTranslations.en.languageButtonLabel
+        : previewTranslations["pt-BR"].languageButtonLabel);
+      const backLink = document.querySelector(".back-link");
+      const backUrl = new URL(backLink.href);
+      backUrl.searchParams.set("lang", language);
+      backLink.href = backUrl;
+      const pageUrl = new URL(window.location.href);
+      pageUrl.searchParams.set("lang", language);
+      history.replaceState(null, "", pageUrl);
+      try {
+        localStorage.setItem(languageStorageKey, language);
+      } catch (error) {
+        if (error.name !== "SecurityError") throw error;
+      }
+    };
+    document.querySelector(".language-toggle").addEventListener("click", () => {
+      window.setPreviewLanguage(previewLanguage === "en" ? "pt-BR" : "en");
+    });
+    window.setPreviewLanguage(previewLanguage);
+
     const sceneDataScript = document.createElement('script');
     sceneDataScript.src = 'scene-data.js';
     sceneDataScript.onload = () => {

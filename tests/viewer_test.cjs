@@ -3,7 +3,7 @@ const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/st
 const listeners={},frames=[];let draws=0;
 const context=new Proxy({},{get:(o,k)=>k in o?o[k]:(()=>{draws++;})});
 const elements={};
-for(const id of ['tv','pad','status','modeLabel','reset','mode','debug'])elements[id]={width:id==='tv'?960:854,height:id==='tv'?540:480,getContext:()=>context};
+for(const id of ['tv','pad','status','modeLabel','reset','mode','debug'])elements[id]={width:id==='tv'?960:854,height:id==='tv'?540:480,dataset:{},getContext:()=>context};
 const sandbox={console,document:{getElementById:id=>elements[id]},navigator:{getGamepads:()=>[]},addEventListener:(name,handler)=>listeners[name]=handler,requestAnimationFrame:fn=>frames.push(fn),Image:class {set src(value){this.width=1280;this.height=1040;queueMicrotask(()=>this.onload());}}};
 sandbox.window=sandbox;vm.createContext(sandbox);
 const sceneDataPath='preview/scene-data.js';

@@ -26,7 +26,9 @@ O preview foi testado com testes de integração que simulam o DOM e o canvas; i
 
 ### GitHub Pages
 
-A página do projeto já está publicada no GitHub Pages: **[agonisingbasher.github.io/stardew-valley-wiiu](https://agonisingbasher.github.io/stardew-valley-wiiu/)**. O botão **Abrir o PREVIEW** leva à demonstração interativa.
+A página do projeto já está publicada no GitHub Pages: **[agonisingbasher.github.io/stardew-valley-wiiu](https://agonisingbasher.github.io/stardew-valley-wiiu/)**. A página e o PREVIEW estão disponíveis em português e inglês. A escolha de idioma é mantida ao navegar entre eles, e o PREVIEW também oferece seu próprio seletor.
+
+O rodapé exibe um contador compacto de visualizações, no estilo do outro projeto, fornecido pelo [Hits.dwyl](https://hits.dwyl.com/).
 
 ---
 
