@@ -118,6 +118,7 @@
       <a href="#desempenho" data-i18n="navPerf">Desempenho</a>
       <a href="#progresso" data-i18n="navProgress">Progresso</a>
       <a href="#limites" data-i18n="navScope">Escopo</a>
+      <a class="lang-link" href="docs/feedback.html?categoria=Stardew%20Valley" data-i18n="navFeedback">Feedback</a>
       <button class="language-toggle" type="button" aria-label="Switch to English" data-i18n-aria-label="languageButtonLabel">EN</button>
     </nav>
   </header>
@@ -184,6 +185,7 @@
           <a href="docs/DESEMPENHO_V011R2.html" data-i18n="docPerf">Desempenho</a>
           <a href="docs/HISTORICO_VERSOES.html" data-i18n="docHistory">Histórico</a>
           <a href="docs/ENTREGA_PADRAO.html" data-i18n="docDelivery">Entrega padrão</a>
+          <a href="docs/feedback.html?categoria=Stardew%20Valley" data-i18n="docFeedback">Feedback</a>
         </div>
       </section>
 
@@ -275,7 +277,7 @@
   <script>
     const translations = {
       en: {
-        navLabel: "Main navigation", navProject: "The project", navPerf: "Performance", navProgress: "Progress", navScope: "Scope",
+        navLabel: "Main navigation", navProject: "The project", navPerf: "Performance", navProgress: "Progress", navScope: "Scope", navFeedback: "Feedback",
         languageButtonLabel: "Switch to Brazilian Portuguese",
         eyebrow: "Experimental lab · V0.11 R2 · 2026-10-25",
         heroTitle: "A living world.", heroTitleSecond: "Two screens. More FPS.",
@@ -300,7 +302,7 @@
         cardMovementText: "1920×1080 TV via GX2, independent GamePad, inventory reused until items/money/date change, and integer world scaling by pixel doubling.",
         cardGamepadNumber: "03 / CONTENT", cardGamepadTitle: "Cooking and Lewis",
         cardGamepadText: "81 original recipes (80 resolved), nine upgraded-house kitchens, starter fried egg; 28 Lewis truck tiles with corrected depth (2,756 px).",
-        docCoverage: "R2 coverage", docPerf: "Performance", docHistory: "History", docDelivery: "Delivery standard",
+        docCoverage: "R2 coverage", docPerf: "Performance", docHistory: "History", docDelivery: "Delivery standard", docFeedback: "Feedback",
         perfLabel: "Measurements", perfTitle: "Performance on Cemu 2.6",
         perfLead: "Linux/Vulkan, Mesa llvmpipe, shared host, 1920×1080 TV. Averages over 60-frame windows (first warm-up window excluded). Project target: 40 FPS minimum, 60 FPS goal — a validation criterion, not a guarantee on physical Wii U.",
         perfScenario: "Scenario", perfAvg: "Avg FPS", perfLow: "Lowest window", perfWorst: "Worst frame", perfOver: "> 25 ms",
@@ -334,7 +336,7 @@
         footerDisclaimer: "Unofficial experimental project. Stardew Valley and its assets belong to their respective owners."
       },
       "pt-BR": {
-        navLabel: "Navegação principal", navProject: "O projeto", navPerf: "Desempenho", navProgress: "Progresso", navScope: "Escopo",
+        navLabel: "Navegação principal", navProject: "O projeto", navPerf: "Desempenho", navProgress: "Progresso", navScope: "Escopo", navFeedback: "Feedback",
         languageButtonLabel: "Mudar para inglês",
         eyebrow: "Laboratório experimental · V0.11 R2 · 25/10/2026",
         heroTitle: "Mundo vivo.", heroTitleSecond: "Duas telas. Mais FPS.",
@@ -359,7 +361,7 @@
         cardMovementText: "TV 1920×1080 via GX2, GamePad independente, inventário reaproveitado até itens/dinheiro/data mudarem, e escala inteira do mundo por duplicação de pixels.",
         cardGamepadNumber: "03 / CONTENT", cardGamepadTitle: "Culinária e Lewis",
         cardGamepadText: "81 receitas originais (80 resolvidas), nove cozinhas das casas melhoradas, ovo frito inicial; 28 tiles do carro do Lewis com profundidade corrigida (2.756 px).",
-        docCoverage: "Cobertura R2", docPerf: "Desempenho", docHistory: "Histórico", docDelivery: "Entrega padrão",
+        docCoverage: "Cobertura R2", docPerf: "Desempenho", docHistory: "Histórico", docDelivery: "Entrega padrão", docFeedback: "Feedback",
         perfLabel: "Medições", perfTitle: "Desempenho no Cemu 2.6",
         perfLead: "Linux/Vulkan, Mesa llvmpipe, host compartilhado, TV 1920×1080. Médias em janelas de 60 quadros (sem a primeira janela de aquecimento). Meta do projeto: mínimo 40 FPS, alvo 60 FPS — critério de validação, não garantia no Wii U físico.",
         perfScenario: "Cenário", perfAvg: "FPS médio", perfLow: "Menor janela", perfWorst: "Pior quadro", perfOver: "> 25 ms",
@@ -446,6 +448,11 @@
         const docUrl = new URL(link.href);
         docUrl.searchParams.set("lang", language);
         link.href = docUrl;
+      });
+      document.querySelectorAll(".lang-link").forEach((link) => {
+        const targetUrl = new URL(link.href, window.location.href);
+        targetUrl.searchParams.set("lang", language);
+        link.href = targetUrl.href;
       });
       const pageUrl = new URL(window.location.href);
       pageUrl.searchParams.set("lang", language);

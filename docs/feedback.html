@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#17231e">
+  <meta name="description" content="Envie feedback, sugestões ou relatos de bugs do laboratório Stardew Valley para Wii U.">
+  <title>Feedback e bugs — Stardew Valley Wii U</title>
+  <link rel="stylesheet" href="doc.css">
+  <link rel="stylesheet" href="feedback.css">
+</head>
+<body>
+  <header class="wrap topbar">
+    <a class="brand lang-link" href="../index.html">🌱 Stardew Valley · Docs</a>
+    <nav class="nav" aria-label="Navegação principal" data-i18n-aria-label="navLabel">
+      <a class="lang-link" href="../index.html" data-i18n="navHome">Início</a>
+      <a href="https://github.com/agonisingbasher/stardew-valley-wiiu" target="_blank" rel="noopener noreferrer" data-i18n="navGithub">GitHub ↗</a>
+      <button class="language-toggle" type="button" aria-label="Mudar para inglês" data-i18n-aria-label="languageButtonLabel">EN</button>
+    </nav>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <section class="hero feedback-hero">
+        <div class="eyebrow" data-i18n="eyebrow">Central de feedback · V0.11 R2</div>
+        <h1 id="feedback-heading" data-i18n-html="title">Feedback e <span>bugs</span></h1>
+        <p class="intro" data-i18n="intro">Encontrou um problema no laboratório ou quer sugerir algo? Descreva o que aconteceu e anexe capturas ou um vídeo curto. Os campos com * são obrigatórios.</p>
+      </section>
+
+      <nav class="doc-nav" aria-label="Documentos" data-i18n-aria-label="docsNavLabel">
+        <a class="lang-link" href="COBERTURA_V011R2.html" data-i18n="docCoverage">Cobertura R2</a>
+        <a class="lang-link" href="DESEMPENHO_V011R2.html" data-i18n="docPerf">Desempenho</a>
+        <a class="lang-link" href="HISTORICO_VERSOES.html" data-i18n="docHistory">Histórico</a>
+        <a class="lang-link" href="ENTREGA_PADRAO.html" data-i18n="docDelivery">Entrega padrão</a>
+        <a class="lang-link" href="feedback.html?categoria=Stardew%20Valley" aria-current="page" data-i18n="docFeedback">Feedback</a>
+      </nav>
+
+      <p class="feedback-category"><span data-i18n="categoryLabel">Categoria</span>: <strong id="feedback-category-value">Stardew Valley</strong></p>
+
+      <form id="feedback-form" class="feedback-form" method="post" enctype="multipart/form-data" action="#" aria-labelledby="feedback-heading">
+        <input type="hidden" name="category" id="feedback-category" value="Stardew Valley">
+        <input type="hidden" name="language" id="feedback-language" value="Português (Brasil)">
+        <div class="feedback-honeypot" aria-hidden="true">
+          <label for="feedback-website">Website</label>
+          <input id="feedback-website" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
+
+        <label for="feedback-name" data-i18n="nameLabel">Nome *</label>
+        <input id="feedback-name" name="name" type="text" autocomplete="name" maxlength="120" required>
+
+        <label for="feedback-email" data-i18n="emailLabel">Contato (email) *</label>
+        <input id="feedback-email" name="email" type="email" autocomplete="email" maxlength="254" required>
+
+        <label for="feedback-title" data-i18n="titleLabel">Título *</label>
+        <input id="feedback-title" name="title" type="text" maxlength="160" required>
+
+        <label for="feedback-description" data-i18n="descriptionLabel">Descrição *</label>
+        <textarea id="feedback-description" name="description" rows="7" maxlength="10000" required></textarea>
+
+        <label for="feedback-images" data-i18n="imagesLabel">Imagens (até 5)</label>
+        <input id="feedback-images" name="attachments[]" type="file" accept="image/*" multiple aria-describedby="feedback-images-hint">
+        <small class="feedback-hint" id="feedback-images-hint" data-i18n="imagesHint">Até 5 imagens. Fotos grandes são reduzidas antes do envio.</small>
+
+        <label for="feedback-video" data-i18n="videoLabel">Vídeo (até 1)</label>
+        <input id="feedback-video" name="attachments[]" type="file" accept="video/*" aria-describedby="feedback-video-hint">
+        <small class="feedback-hint" id="feedback-video-hint" data-i18n="videoHint">Um vídeo de até 20 MB.</small>
+
+        <progress class="feedback-progress" id="feedback-progress" max="100" value="0" hidden></progress>
+        <p id="feedback-status" class="feedback-status" role="status" aria-live="polite" data-state="info">Preencha os campos e envie quando estiver pronto.</p>
+        <button class="feedback-submit" type="submit" data-i18n="submitLabel">Enviar feedback</button>
+        <p class="feedback-privacy" data-i18n="privacyNote">O envio usa um serviço externo de formulários e é encaminhado por e-mail ao desenvolvedor. Não envie senhas, saves privados ou dados pessoais sensíveis.</p>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap doc-footer-links">
+      <span data-i18n="footerDisclaimer">Projeto experimental e não oficial. Stardew Valley e seus recursos pertencem aos respectivos titulares.</span>
+      <a class="lang-link" href="../index.html" data-i18n="backToSite">Voltar ao site</a>
+    </div>
+  </footer>
+
+  <script>
+    window.pageTranslations = {
+      en: {
+        pageTitle: "Feedback & bug reports — Stardew Valley Wii U",
+        pageDescription: "Send feedback, suggestions, or bug reports for the Stardew Valley Wii U lab.",
+        navLabel: "Main navigation",
+        navHome: "Home",
+        navGithub: "GitHub ↗",
+        languageButtonLabel: "Switch to Brazilian Portuguese",
+        eyebrow: "Feedback center · V0.11 R2",
+        title: "Feedback & <span>bug reports</span>",
+        intro: "Found a problem in the lab or want to suggest something? Describe what happened and attach screenshots or a short video. Fields marked * are required.",
+        docsNavLabel: "Documents",
+        docCoverage: "R2 coverage",
+        docPerf: "Performance",
+        docHistory: "History",
+        docDelivery: "Delivery standard",
+        docFeedback: "Feedback",
+        categoryLabel: "Category",
+        nameLabel: "Name *",
+        emailLabel: "Contact (email) *",
+        titleLabel: "Title *",
+        descriptionLabel: "Description *",
+        imagesLabel: "Images (up to 5)",
+        imagesHint: "Up to 5 images. Large photos are reduced before uploading.",
+        videoLabel: "Video (up to 1)",
+        videoHint: "One video of up to 20 MB.",
+        submitLabel: "Send feedback",
+        privacyNote: "Submissions go through an external form service and are forwarded by email to the developer. Do not send passwords, private saves, or sensitive personal data.",
+        footerDisclaimer: "Unofficial experimental project. Stardew Valley and its assets belong to their respective owners.",
+        backToSite: "Back to the site"
+      }
+    };
+  </script>
+  <script src="doc-lang.js"></script>
+  <script src="feedback.js?v=2026.10.26.1"></script>
+</body>
+</html>

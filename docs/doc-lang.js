@@ -93,6 +93,8 @@
     const pageUrl = new URL(window.location.href);
     pageUrl.searchParams.set("lang", language);
     history.replaceState(null, "", pageUrl);
+
+    document.dispatchEvent(new CustomEvent("languagechange", { detail: { language } }));
   }
 
   if (languageButton) {
