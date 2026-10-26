@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#17231e">
+  <meta name="description" content="Padrão de entrega do laboratório Stardew Valley para Wii U: um único ZIP com executáveis, fonte, instruções, histórico, testes e hashes.">
+  <title>Entrega padrão — Stardew Valley Wii U</title>
+  <link rel="stylesheet" href="doc.css">
+</head>
+<body>
+  <header class="wrap topbar">
+    <a class="brand lang-link" href="../index.html">🌱 Stardew Valley · Docs</a>
+    <nav class="nav" aria-label="Navegação principal" data-i18n-aria-label="navLabel">
+      <a class="lang-link" href="../index.html" data-i18n="navHome">Início</a>
+      <a href="https://github.com/agonisingbasher/stardew-valley-wiiu" target="_blank" rel="noopener noreferrer" data-i18n="navGithub">GitHub ↗</a>
+      <button class="language-toggle" type="button" aria-label="Mudar para inglês" data-i18n-aria-label="languageButtonLabel">EN</button>
+    </nav>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <section class="hero">
+        <div class="eyebrow" data-i18n="eyebrow">Documentação · V0.11 R2</div>
+        <h1 data-i18n-html="title">Entrega <span>padrão</span></h1>
+        <p class="intro" data-i18n-html="intro">Cada versão deve ser entregue em <strong>um único arquivo ZIP contendo os executáveis compilados e o código-fonte correspondente</strong>.</p>
+      </section>
+
+      <nav class="doc-nav" aria-label="Documentos" data-i18n-aria-label="docsNavLabel">
+        <a class="lang-link" href="COBERTURA_V011R2.html" data-i18n="docCoverage">Cobertura R2</a>
+        <a class="lang-link" href="DESEMPENHO_V011R2.html" data-i18n="docPerf">Desempenho</a>
+        <a class="lang-link" href="HISTORICO_VERSOES.html" data-i18n="docHistory">Histórico</a>
+        <a class="lang-link" href="ENTREGA_PADRAO.html" aria-current="page" data-i18n="docDelivery">Entrega padrão</a>
+      </nav>
+
+      <div class="prose">
+        <section>
+          <div class="section-label" data-i18n="deliveryLabel">O pacote</div>
+          <h2 data-i18n="deliveryTitle">Um ZIP por versão</h2>
+          <p data-i18n-html="deliveryText">As pastas <code>executavel/</code> e <code>fonte/</code> ficam no mesmo pacote, acompanhadas de instruções, histórico da versão, testes e hashes. Só separar os pacotes se o usuário pedir explicitamente.</p>
+
+          <article class="version-card">
+            <div class="meta" data-i18n="packageMeta">CONTEÚDO DO PACOTE</div>
+            <h3 data-i18n="packageTitle">O que vai no ZIP</h3>
+            <ul>
+              <li data-i18n-html="packageExecutable"><code>executavel/</code> — executáveis compilados da versão.</li>
+              <li data-i18n-html="packageSource"><code>fonte/</code> — código-fonte correspondente.</li>
+              <li data-i18n="packageInstructions">Instruções de uso e reprodução.</li>
+              <li data-i18n="packageHistory">Histórico da versão.</li>
+              <li data-i18n="packageTests">Testes e evidências.</li>
+              <li data-i18n="packageHashes">Hashes para conferência.</li>
+            </ul>
+          </article>
+
+          <div class="callout">
+            <strong data-i18n="calloutImportant">Importante:</strong>
+            <span data-i18n="calloutText">fonte e executáveis andam juntos. A separação em pacotes distintos só acontece mediante pedido explícito.</span>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap doc-footer-links">
+      <span data-i18n="footerDisclaimer">Projeto experimental e não oficial. Stardew Valley e seus recursos pertencem aos respectivos titulares.</span>
+      <a class="lang-link" href="../index.html" data-i18n="backToSite">Voltar ao site</a>
+    </div>
+  </footer>
+
+  <script>
+    window.pageTranslations = {
+      en: {
+        pageTitle: "Delivery standard — Stardew Valley Wii U",
+        pageDescription: "Delivery standard for the Stardew Valley Wii U lab: one ZIP with executables, source, instructions, history, tests, and hashes.",
+        navLabel: "Main navigation",
+        navHome: "Home",
+        navGithub: "GitHub ↗",
+        languageButtonLabel: "Switch to Brazilian Portuguese",
+        eyebrow: "Documentation · V0.11 R2",
+        title: "Delivery <span>standard</span>",
+        intro: "Each version must be delivered as <strong>a single ZIP file containing the compiled executables and the corresponding source code</strong>.",
+        docsNavLabel: "Documents",
+        docCoverage: "R2 coverage",
+        docPerf: "Performance",
+        docHistory: "History",
+        docDelivery: "Delivery standard",
+        deliveryLabel: "The package",
+        deliveryTitle: "One ZIP per version",
+        deliveryText: "The <code>executavel/</code> and <code>fonte/</code> folders stay in the same package, accompanied by instructions, version history, tests, and hashes. Split the packages only if the user explicitly requests it.",
+        packageMeta: "PACKAGE CONTENTS",
+        packageTitle: "What goes in the ZIP",
+        packageExecutable: "<code>executavel/</code> — compiled executables for the version.",
+        packageSource: "<code>fonte/</code> — corresponding source code.",
+        packageInstructions: "Usage and reproduction instructions.",
+        packageHistory: "Version history.",
+        packageTests: "Tests and evidence.",
+        packageHashes: "Checksums for verification.",
+        calloutImportant: "Important:",
+        calloutText: "source and executables travel together. Splitting them into separate packages only happens upon explicit request.",
+        footerDisclaimer: "Unofficial experimental project. Stardew Valley and its assets belong to their respective owners.",
+        backToSite: "Back to the site"
+      }
+    };
+  </script>
+  <script src="doc-lang.js"></script>
+</body>
+</html>

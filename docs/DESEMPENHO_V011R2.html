@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#17231e">
+  <meta name="description" content="Medições de desempenho da V0.11 R2 no Cemu 2.6: seis cenários, janelas de 60 quadros e limites da validação.">
+  <title>Desempenho V0.11 R2 — Stardew Valley Wii U</title>
+  <link rel="stylesheet" href="doc.css">
+</head>
+<body>
+  <header class="wrap topbar">
+    <a class="brand lang-link" href="../index.html">🌱 Stardew Valley · Docs</a>
+    <nav class="nav" aria-label="Navegação principal" data-i18n-aria-label="navLabel">
+      <a class="lang-link" href="../index.html" data-i18n="navHome">Início</a>
+      <a href="https://github.com/agonisingbasher/stardew-valley-wiiu" target="_blank" rel="noopener noreferrer" data-i18n="navGithub">GitHub ↗</a>
+      <button class="language-toggle" type="button" aria-label="Mudar para inglês" data-i18n-aria-label="languageButtonLabel">EN</button>
+    </nav>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <section class="hero">
+        <div class="eyebrow" data-i18n="eyebrow">Documentação · V0.11 R2</div>
+        <h1 data-i18n-html="title">Desempenho da <span>V0.11 R2</span></h1>
+        <p class="intro" data-i18n="intro">Cemu 2.6, Linux/Vulkan, Mesa llvmpipe, host compartilhado. TV 1920×1080. Movimento programado, seis cenários. Médias em janelas de 60 quadros, excluindo a primeira janela de cada visita para aquecimento. Não é medição do Wii U físico.</p>
+      </section>
+
+      <nav class="doc-nav" aria-label="Documentos" data-i18n-aria-label="docsNavLabel">
+        <a class="lang-link" href="COBERTURA_V011R2.html" data-i18n="docCoverage">Cobertura R2</a>
+        <a class="lang-link" href="DESEMPENHO_V011R2.html" aria-current="page" data-i18n="docPerf">Desempenho</a>
+        <a class="lang-link" href="HISTORICO_VERSOES.html" data-i18n="docHistory">Histórico</a>
+        <a class="lang-link" href="ENTREGA_PADRAO.html" data-i18n="docDelivery">Entrega padrão</a>
+      </nav>
+
+      <div class="prose">
+        <section>
+          <div class="section-label" data-i18n="perfLabel">Medições</div>
+          <h2 data-i18n="perfTitle">Medição de desempenho</h2>
+          <div class="table-scroll">
+            <table class="perf-table">
+              <thead>
+                <tr>
+                  <th data-i18n="perfScenario">Cenário</th>
+                  <th data-i18n="perfAvg">FPS médio</th>
+                  <th data-i18n="perfLow">Menor média de janela</th>
+                  <th data-i18n="perfWorst">Pior quadro (ms)</th>
+                  <th data-i18n="perfOver">Quadros acima de 25 ms</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td data-i18n="perfFarmMove">Fazenda em movimento</td><td>49.7</td><td>45.2</td><td>127.879</td><td>52/360</td></tr>
+                <tr><td data-i18n="perfFarmRain">Fazenda com chuva</td><td>54.2</td><td>46.9</td><td>31.567</td><td>28/360</td></tr>
+                <tr><td data-i18n="perfFarmNight">Fazenda à noite</td><td>54.4</td><td>50.4</td><td>38.533</td><td>28/360</td></tr>
+                <tr><td data-i18n="perfTownLewis">Cidade / carro Lewis</td><td>60.0</td><td>59.1</td><td>29.408</td><td>1/360</td></tr>
+                <tr><td data-i18n="perfTownRiver">Cidade / rio</td><td>60.2</td><td>59.9</td><td>23.816</td><td>0/360</td></tr>
+                <tr><td data-i18n="perfPierre">Interior Pierre</td><td>60.0</td><td>59.4</td><td>29.526</td><td>3/360</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout">
+            <strong data-i18n="calloutImportant">Importante:</strong>
+            <span data-i18n="perfCallout">o teste mostrou médias acima de 40 FPS e várias próximas de 60. Existem picos: portanto, mínimo contínuo de 40 FPS ainda NÃO foi atingido/garantido. O pior pico observado fora das janelas de aquecimento foi 127,879 ms na fazenda. Ambiente compartilhado e renderização Vulkan por software também afetam a comparação.</span>
+          </div>
+        </section>
+
+        <section>
+          <div class="section-label" data-i18n="logsLabel">Logs</div>
+          <h2 data-i18n="logsTitle">Como ler os resultados</h2>
+          <p data-i18n="logsText">Os logs brutos contêm inclusive aquecimento e troca de cenário. O log do executável de distribuição confirma o funcionamento sem movimento programado. A versão compatível foi inicializada separadamente.</p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap doc-footer-links">
+      <span data-i18n="footerDisclaimer">Projeto experimental e não oficial. Stardew Valley e seus recursos pertencem aos respectivos titulares.</span>
+      <a class="lang-link" href="../index.html" data-i18n="backToSite">Voltar ao site</a>
+    </div>
+  </footer>
+
+  <script>
+    window.pageTranslations = {
+      en: {
+        pageTitle: "V0.11 R2 Performance — Stardew Valley Wii U",
+        pageDescription: "V0.11 R2 performance measurements on Cemu 2.6: six scenarios, 60-frame windows, and validation limits.",
+        navLabel: "Main navigation",
+        navHome: "Home",
+        navGithub: "GitHub ↗",
+        languageButtonLabel: "Switch to Brazilian Portuguese",
+        eyebrow: "Documentation · V0.11 R2",
+        title: "V0.11 R2 <span>performance</span>",
+        intro: "Cemu 2.6, Linux/Vulkan, Mesa llvmpipe, shared host. 1920×1080 TV. Scripted movement, six scenarios. Averages over 60-frame windows, excluding the first window of each visit for warm-up. Not a physical Wii U measurement.",
+        docsNavLabel: "Documents",
+        docCoverage: "R2 coverage",
+        docPerf: "Performance",
+        docHistory: "History",
+        docDelivery: "Delivery standard",
+        perfLabel: "Measurements",
+        perfTitle: "Performance measurement",
+        perfScenario: "Scenario",
+        perfAvg: "Avg FPS",
+        perfLow: "Lowest window average",
+        perfWorst: "Worst frame (ms)",
+        perfOver: "Frames above 25 ms",
+        perfFarmMove: "Farm in motion",
+        perfFarmRain: "Farm in rain",
+        perfFarmNight: "Farm at night",
+        perfTownLewis: "Town / Lewis truck",
+        perfTownRiver: "Town / river",
+        perfPierre: "Pierre interior",
+        calloutImportant: "Important:",
+        perfCallout: "the test showed averages above 40 FPS and several near 60. Spikes exist: therefore, a continuous 40 FPS minimum has still NOT been reached/guaranteed. The worst spike observed outside warm-up windows was 127.879 ms on the farm. The shared environment and software Vulkan rendering also affect the comparison.",
+        logsLabel: "Logs",
+        logsTitle: "How to read the results",
+        logsText: "Raw logs include warm-up and scenario changes. The distribution executable log confirms operation without scripted movement. The compat version was initialized separately.",
+        footerDisclaimer: "Unofficial experimental project. Stardew Valley and its assets belong to their respective owners.",
+        backToSite: "Back to the site"
+      }
+    };
+  </script>
+  <script src="doc-lang.js"></script>
+</body>
+</html>

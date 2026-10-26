@@ -180,10 +180,10 @@
           </article>
         </div>
         <div class="doc-links">
-          <a href="docs/COBERTURA_V011R2.md" data-i18n="docCoverage">Cobertura R2</a>
-          <a href="docs/DESEMPENHO_V011R2.md" data-i18n="docPerf">Desempenho</a>
-          <a href="docs/HISTORICO_VERSOES.md" data-i18n="docHistory">Histórico</a>
-          <a href="docs/ENTREGA_PADRAO.md" data-i18n="docDelivery">Entrega padrão</a>
+          <a href="docs/COBERTURA_V011R2.html" data-i18n="docCoverage">Cobertura R2</a>
+          <a href="docs/DESEMPENHO_V011R2.html" data-i18n="docPerf">Desempenho</a>
+          <a href="docs/HISTORICO_VERSOES.html" data-i18n="docHistory">Histórico</a>
+          <a href="docs/ENTREGA_PADRAO.html" data-i18n="docDelivery">Entrega padrão</a>
         </div>
       </section>
 
@@ -441,6 +441,11 @@
         const previewUrl = new URL(link.href);
         previewUrl.searchParams.set("lang", language);
         link.href = previewUrl;
+      });
+      document.querySelectorAll(".doc-links a").forEach((link) => {
+        const docUrl = new URL(link.href);
+        docUrl.searchParams.set("lang", language);
+        link.href = docUrl;
       });
       const pageUrl = new URL(window.location.href);
       pageUrl.searchParams.set("lang", language);
