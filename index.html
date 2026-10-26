@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#17231e">
-  <meta name="description" content="Um protótipo experimental que explora como Stardew Valley poderia aproveitar a TV e o GamePad do Wii U.">
-  <title>Stardew Valley para Wii U — Laboratório v0.1</title>
+  <meta name="description" content="Protótipo experimental de Stardew Valley para Wii U / Cemu — V0.11 R2 com TV Full HD, GamePad independente e medições de desempenho.">
+  <title>Stardew Valley para Wii U — Laboratório V0.11 R2</title>
   <style>
     :root {
       color-scheme: dark;
@@ -39,17 +39,20 @@
     .language-toggle:hover { border-color: var(--green); color: var(--green); }
     .hero { padding: 48px 0 34px; }
     .eyebrow { color: var(--gold); font-size: .78rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
-    h1 { max-width: 850px; margin: 14px 0; font-size: clamp(2.5rem, 7vw, 5.4rem); line-height: .99; letter-spacing: -.055em; }
+    h1 { max-width: 900px; margin: 14px 0; font-size: clamp(2.5rem, 7vw, 5.1rem); line-height: .99; letter-spacing: -.055em; }
     h1 span { color: var(--green); }
-    .intro { max-width: 720px; margin: 20px 0 26px; color: var(--muted); font-size: clamp(1.05rem, 2vw, 1.25rem); }
+    .intro { max-width: 760px; margin: 20px 0 26px; color: var(--muted); font-size: clamp(1.05rem, 2vw, 1.25rem); }
     .actions { display: flex; flex-wrap: wrap; gap: 12px; }
     .button { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; gap: 9px; padding: 11px 18px; border: 1px solid var(--line); border-radius: 9px; color: var(--text); font-weight: 750; text-decoration: none; transition: transform .16s ease, background .16s ease; }
     .button:hover { transform: translateY(-2px); background: var(--panel-light); }
     .button-primary { border-color: var(--green); background: var(--green); color: #17231e; }
     .button-primary:hover { background: #bce891; }
-    .banner { margin: 18px 0 48px; overflow: hidden; border: 1px solid var(--line); border-radius: 16px; background: #17231e; box-shadow: 0 22px 70px #0005; }
+    .banner { margin: 18px 0 28px; overflow: hidden; border: 1px solid var(--line); border-radius: 16px; background: #17231e; box-shadow: 0 22px 70px #0005; }
     .banner img { display: block; width: 100%; height: auto; }
     .caption { margin: 0; padding: 11px 16px; color: var(--muted); font-size: .85rem; }
+    .gallery { display: grid; grid-template-columns: 1.2fr .8fr; gap: 14px; margin: 0 0 48px; }
+    .gallery figure { margin: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: #17231e; }
+    .gallery img { display: block; width: 100%; height: auto; }
     .facts { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0 0 68px; border: 1px solid var(--line); border-radius: 13px; background: #17211c; }
     .fact { padding: 18px 22px; }
     .fact + .fact { border-left: 1px solid var(--line); }
@@ -58,7 +61,7 @@
     section { padding: 20px 0 62px; }
     .section-label { color: var(--gold); font-size: .75rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
     h2 { margin: 7px 0 10px; font-size: clamp(1.8rem, 4vw, 2.7rem); line-height: 1.15; letter-spacing: -.035em; }
-    .section-lead { max-width: 720px; color: var(--muted); }
+    .section-lead { max-width: 760px; color: var(--muted); }
     .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 24px; }
     .card { padding: 22px; border: 1px solid var(--line); border-radius: 12px; background: linear-gradient(145deg, var(--panel-light), var(--panel)); }
     .card-number { color: var(--gold); font: 750 .8rem ui-monospace, monospace; letter-spacing: .12em; }
@@ -66,28 +69,39 @@
     .card p { margin: 0; color: var(--muted); font-size: .94rem; }
     .callout { margin-top: 22px; padding: 19px 22px; border-left: 3px solid var(--gold); border-radius: 0 9px 9px 0; background: #24261d; color: var(--muted); }
     .callout strong { color: var(--text); }
-    .status-table { width: 100%; margin-top: 20px; border-collapse: collapse; }
-    .status-table th, .status-table td { padding: 13px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
-    .status-table th { color: var(--green); font-size: .85rem; }
-    .status-table td { color: var(--muted); }
+    .status-table, .perf-table { width: 100%; margin-top: 20px; border-collapse: collapse; }
+    .status-table th, .status-table td,
+    .perf-table th, .perf-table td { padding: 13px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    .status-table th, .perf-table th { color: var(--green); font-size: .85rem; }
+    .status-table td, .perf-table td { color: var(--muted); }
     .status-table td:first-child { width: 25%; color: var(--text); font-weight: 700; }
+    .perf-table td:not(:first-child), .perf-table th:not(:first-child) { text-align: right; font-variant-numeric: tabular-nums; }
+    .perf-table td:first-child { color: var(--text); font-weight: 700; }
     .controls { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 0; list-style: none; }
     .controls li { padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); color: var(--muted); }
     kbd { padding: 2px 6px; border: 1px solid #52604f; border-radius: 5px; background: #27332a; color: var(--text); font: .85rem ui-monospace, monospace; }
+    .doc-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .doc-links a { padding: 8px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); color: var(--muted); text-decoration: none; font-size: .9rem; font-weight: 700; }
+    .doc-links a:hover { color: var(--text); border-color: var(--green); }
     .bottom-cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; margin: 10px 0 60px; padding: 26px; border: 1px solid var(--line); border-radius: 14px; background: linear-gradient(120deg, #253b29, #1a2620 65%); }
     .bottom-cta h2 { margin: 0; font-size: 1.65rem; }
     .bottom-cta p { margin: 5px 0 0; color: var(--muted); }
+    .cta-actions { display: flex; flex-wrap: wrap; gap: 10px; }
     footer { padding: 22px 0 34px; border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; }
     .footer-content { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; }
     .view-counter { display: inline-flex; align-items: center; }
     .view-counter img { display: block; }
+    @media (max-width: 900px) {
+      .gallery { grid-template-columns: 1fr; }
+    }
     @media (max-width: 760px) {
       .topbar { align-items: flex-start; flex-direction: column; }
       .hero { padding-top: 30px; }
       .facts, .cards { grid-template-columns: 1fr; }
       .fact + .fact { border-top: 1px solid var(--line); border-left: 0; }
       .controls { grid-template-columns: repeat(2, 1fr); }
-      .status-table th, .status-table td { padding: 10px 7px; font-size: .88rem; }
+      .status-table th, .status-table td,
+      .perf-table th, .perf-table td { padding: 10px 7px; font-size: .88rem; }
       .status-table td:first-child { width: 31%; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -101,6 +115,7 @@
     <a class="brand" href="#inicio">🌱 Stardew Valley · Wii U</a>
     <nav class="nav" aria-label="Navegação principal" data-i18n-aria-label="navLabel">
       <a href="#projeto" data-i18n="navProject">O projeto</a>
+      <a href="#desempenho" data-i18n="navPerf">Desempenho</a>
       <a href="#progresso" data-i18n="navProgress">Progresso</a>
       <a href="#limites" data-i18n="navScope">Escopo</a>
       <button class="language-toggle" type="button" aria-label="Switch to English" data-i18n-aria-label="languageButtonLabel">EN</button>
@@ -110,95 +125,141 @@
   <main id="inicio">
     <div class="wrap">
       <section class="hero" aria-labelledby="page-title">
-        <div class="eyebrow" data-i18n="eyebrow">Laboratório experimental · v0.1</div>
-        <h1 id="page-title"><span data-i18n="heroTitle">Uma fazenda.</span><br><span data-i18n="heroTitleSecond">Duas telas.</span></h1>
-        <p class="intro" data-i18n="intro">Um conceito de como Stardew Valley poderia aproveitar o Wii U: a TV para explorar a fazenda e o GamePad como uma segunda tela útil — começando por um protótipo técnico de mapa, movimento e câmera.</p>
+        <div class="eyebrow" data-i18n="eyebrow">Laboratório experimental · V0.11 R2 · 25/10/2026</div>
+        <h1 id="page-title"><span data-i18n="heroTitle">Mundo vivo.</span><br><span data-i18n="heroTitleSecond">Duas telas. Mais FPS.</span></h1>
+        <p class="intro" data-i18n="intro">Protótipo nativo de Stardew Valley para Wii U / Cemu: TV Full HD, GamePad independente, 48 mapas, NPCs, agricultura e agora cache por região, UI otimizada e medições reais de desempenho.</p>
         <div class="actions">
-          <a class="button button-primary preview-link" href="preview/index.html" data-i18n="openPreview">▶ Abrir o PREVIEW</a>
-          <a class="button" href="#projeto" data-i18n="learnProject">Conhecer o projeto ↓</a>
-          <a class="button" href="https://agonisingbasher.github.io/personal-website/" data-i18n="otherProjects">Outros projetos ↗</a>
+          <a class="button button-primary" href="#desempenho" data-i18n="openPerf">Ver medições ↓</a>
+          <a class="button" href="#projeto" data-i18n="learnProject">Conhecer a R2 ↓</a>
           <a class="button" href="https://github.com/agonisingbasher/stardew-valley-wiiu" target="_blank" rel="noopener noreferrer" data-i18n="githubProject">Projeto no GitHub ↗</a>
+          <a class="button" href="https://agonisingbasher.github.io/personal-website/" data-i18n="otherProjects">Outros projetos ↗</a>
         </div>
       </section>
 
       <figure class="banner">
-        <img src="docs/banner.png" alt="Conceito de Stardew Valley no Wii U com a fazenda na TV e o mapa e inventário no GamePad" data-i18n-alt="bannerAlt" width="1024" height="576">
-        <figcaption class="caption" data-i18n="bannerCaption">Banner provisório do projeto; algumas funções mostradas ainda são conceitos.</figcaption>
+        <img src="docs/cemu-r2-release.png" alt="Captura da V0.11 R2 no Cemu: fazenda, HUD original e inventário em português" data-i18n-alt="bannerAlt" width="1280" height="720">
+        <figcaption class="caption" data-i18n="bannerCaption">Captura da V0.11 R2 no Cemu 2.6 — fazenda na saída Full HD com interface original.</figcaption>
       </figure>
 
+      <div class="gallery" aria-label="Mais capturas da R2" data-i18n-aria-label="galleryLabel">
+        <figure>
+          <img src="docs/r2-lewis-car.png" alt="Carro do Lewis na cidade sob chuva, com profundidade corrigida" data-i18n-alt="galleryLewisAlt" width="960" height="540">
+          <figcaption class="caption" data-i18n="galleryLewisCaption">Carro do Lewis: profundidade ancorada no veículo, sem herdar a cerca.</figcaption>
+        </figure>
+        <figure>
+          <img src="docs/banner.png" alt="Conceito original das duas telas: TV e GamePad" data-i18n-alt="galleryConceptAlt" width="1024" height="576">
+          <figcaption class="caption" data-i18n="galleryConceptCaption">Conceito das duas telas que guiou o laboratório desde a v0.1.</figcaption>
+        </figure>
+      </div>
+
       <div class="facts" aria-label="Resumo da versão" data-i18n-aria-label="factsLabel">
-        <div class="fact"><strong>v0.1</strong><span data-i18n="factVersion">primeira base experimental</span></div>
-        <div class="fact"><strong>80 × 65</strong><span data-i18n="factMap">blocos no mapa da fazenda reconstruído</span></div>
-        <div class="fact"><strong data-i18n="factScreensNumber">2 telas</strong><span data-i18n="factScreens">TV e GamePad no conceito e na simulação</span></div>
+        <div class="fact"><strong>V0.11 R2</strong><span data-i18n="factVersion">cache, UI e culinária · 25/10/2026</span></div>
+        <div class="fact"><strong>48 / 34</strong><span data-i18n="factMap">mapas e NPCs no mundo conectado</span></div>
+        <div class="fact"><strong>~50–60</strong><span data-i18n="factScreens">FPS médio no Cemu (6 cenários)</span></div>
       </div>
 
       <section id="projeto">
-        <div class="section-label" data-i18n="ideaLabel">A ideia</div>
-        <h2 data-i18n="ideaTitle">O GamePad como parte do jogo</h2>
-        <p class="section-lead" data-i18n="ideaLead">Em vez de espelhar a TV, a tela de toque poderia manter mapa, inventário e informações da vila sempre à mão. O protótipo atual dá os primeiros passos nessa direção, sem confundir a visão futura com o que já está pronto.</p>
+        <div class="section-label" data-i18n="ideaLabel">A revisão</div>
+        <h2 data-i18n="ideaTitle">O que a V0.11 R2 entrega</h2>
+        <p class="section-lead" data-i18n="ideaLead">A R2 foca em desempenho e Content: cache limitado do cenário, preparação de chegada, inventário do GamePad só quando muda, iluminação/chuva por tabelas, carro do Lewis corrigido e culinária original nas cozinhas melhoradas.</p>
         <div class="cards">
           <article class="card">
-            <div class="card-number" data-i18n="cardMapNumber">01 / MAPA</div>
-            <h3 data-i18n="cardMapTitle">Fazenda reconstruída</h3>
-            <p data-i18n="cardMapText">O mapa tBIN10 fornecido foi lido e convertido para a demonstração, com camadas e recursos visuais organizados para exploração.</p>
+            <div class="card-number" data-i18n="cardMapNumber">01 / CACHE</div>
+            <h3 data-i18n="cardMapTitle">Região e chegada</h3>
+            <p data-i18n="cardMapText">Até 160 blocos 64×64 com descarte LRU; desenho só da câmera; preparação de até dois blocos por quadro perto de portas e transições, sem buracos visuais.</p>
           </article>
           <article class="card">
-            <div class="card-number" data-i18n="cardMovementNumber">02 / MOVIMENTO</div>
-            <h3 data-i18n="cardMovementTitle">Câmera e colisão básica</h3>
-            <p data-i18n="cardMovementText">Um avatar temporário percorre o cenário com movimento em oito direções, câmera de acompanhamento e colisão aproximada.</p>
+            <div class="card-number" data-i18n="cardMovementNumber">02 / TELAS</div>
+            <h3 data-i18n="cardMovementTitle">Full HD + GamePad</h3>
+            <p data-i18n="cardMovementText">TV 1920×1080 via GX2, GamePad independente, inventário reaproveitado até itens/dinheiro/data mudarem, e escala inteira do mundo por duplicação de pixels.</p>
           </article>
           <article class="card">
-            <div class="card-number" data-i18n="cardGamepadNumber">03 / GAMEPAD</div>
-            <h3 data-i18n="cardGamepadTitle">Simulação da segunda tela</h3>
-            <p data-i18n="cardGamepadText">No preview, o GamePad alterna entre mapa e jogo. Há também uma base inicial em C++ para saída nas duas telas do Wii U.</p>
+            <div class="card-number" data-i18n="cardGamepadNumber">03 / CONTENT</div>
+            <h3 data-i18n="cardGamepadTitle">Culinária e Lewis</h3>
+            <p data-i18n="cardGamepadText">81 receitas originais (80 resolvidas), nove cozinhas das casas melhoradas, ovo frito inicial; 28 tiles do carro do Lewis com profundidade corrigida (2.756 px).</p>
           </article>
+        </div>
+        <div class="doc-links">
+          <a href="docs/COBERTURA_V011R2.md" data-i18n="docCoverage">Cobertura R2</a>
+          <a href="docs/DESEMPENHO_V011R2.md" data-i18n="docPerf">Desempenho</a>
+          <a href="docs/HISTORICO_VERSOES.md" data-i18n="docHistory">Histórico</a>
+          <a href="docs/ENTREGA_PADRAO.md" data-i18n="docDelivery">Entrega padrão</a>
         </div>
       </section>
 
+      <section id="desempenho">
+        <div class="section-label" data-i18n="perfLabel">Medições</div>
+        <h2 data-i18n="perfTitle">Desempenho no Cemu 2.6</h2>
+        <p class="section-lead" data-i18n="perfLead">Linux/Vulkan, Mesa llvmpipe, host compartilhado, TV 1920×1080. Médias em janelas de 60 quadros (sem a primeira janela de aquecimento). Meta do projeto: mínimo 40 FPS, alvo 60 FPS — critério de validação, não garantia no Wii U físico.</p>
+        <table class="perf-table">
+          <thead>
+            <tr>
+              <th data-i18n="perfScenario">Cenário</th>
+              <th data-i18n="perfAvg">FPS médio</th>
+              <th data-i18n="perfLow">Menor janela</th>
+              <th data-i18n="perfWorst">Pior quadro</th>
+              <th data-i18n="perfOver">&gt; 25 ms</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td data-i18n="perfFarmMove">Fazenda em movimento</td><td>49.7</td><td>45.2</td><td>127.879 ms</td><td>52/360</td></tr>
+            <tr><td data-i18n="perfFarmRain">Fazenda com chuva</td><td>54.2</td><td>46.9</td><td>31.567 ms</td><td>28/360</td></tr>
+            <tr><td data-i18n="perfFarmNight">Fazenda à noite</td><td>54.4</td><td>50.4</td><td>38.533 ms</td><td>28/360</td></tr>
+            <tr><td data-i18n="perfTownLewis">Cidade / carro Lewis</td><td>60.0</td><td>59.1</td><td>29.408 ms</td><td>1/360</td></tr>
+            <tr><td data-i18n="perfTownRiver">Cidade / rio</td><td>60.2</td><td>59.9</td><td>23.816 ms</td><td>0/360</td></tr>
+            <tr><td data-i18n="perfPierre">Interior Pierre</td><td>60.0</td><td>59.4</td><td>29.526 ms</td><td>3/360</td></tr>
+          </tbody>
+        </table>
+        <div class="callout"><strong data-i18n="calloutImportant">Importante:</strong> <span data-i18n="perfCallout">médias acima de 40 FPS e várias próximas de 60 — mas o mínimo contínuo de 40 FPS ainda não foi atingido/garantido. O pior pico fora do aquecimento foi 127,879 ms na fazenda. Emulador, processador e driver influenciam o resultado; não é medição do Wii U físico.</span></div>
+      </section>
+
       <section id="progresso">
-        <div class="section-label" data-i18n="progressLabel">Estado da v0.1</div>
+        <div class="section-label" data-i18n="progressLabel">Estado da V0.11 R2</div>
         <h2 data-i18n="progressTitle">O que já foi validado</h2>
-        <p class="section-lead" data-i18n="progressLead">A documentação separa os testes que foram executados no computador do que ainda precisa de toolchain ou console real.</p>
+        <p class="section-lead" data-i18n="progressLead">15 suítes C++, assets, ASan/UBSan, 35 capturas com pixels idênticos à R1 (exceto a correção do carro), 862 objetos PowerPC comparados byte a byte. RPXs principal e compat compilados.</p>
         <table class="status-table">
           <thead><tr><th data-i18n="tableArea">Área</th><th data-i18n="tableEvidence">Evidência e limite</th></tr></thead>
           <tbody>
-            <tr><td data-i18n="tableMapTitle">Leitura do mapa</td><td data-i18n="tableMapText">O arquivo tBIN10 de 80 × 65 blocos, seis camadas e quatro tilesets foi lido e convertido para o protótipo.</td></tr>
-            <tr><td data-i18n="tableCoreTitle">Núcleo C++</td><td data-i18n="tableCoreText">Testado no computador para colisão, limites, normalização diagonal e posição inicial válida.</td></tr>
-            <tr><td data-i18n="tablePreviewTitle">Preview</td><td data-i18n="tablePreviewText">Teste de integração com DOM/canvas simulados cobre movimento, reinício, troca de tela, limites e perda de foco.</td></tr>
-            <tr><td data-i18n="tableConsoleTitle">Console Wii U</td><td data-i18n="tableConsoleText">Código inicial baseado em WUT existe, mas não foi compilado nem testado no console nesta entrega.</td></tr>
-            <tr><td data-i18n="tablePerformanceTitle">Desempenho</td><td data-i18n="tablePerformanceText">Não há medição de FPS no Wii U. O renderer nativo usa OSScreen e um viewport de teste por software.</td></tr>
+            <tr><td data-i18n="tableWorldTitle">Mundo</td><td data-i18n="tableWorldText">48 mapas, 34 NPCs, agendas, inventário, remessa, calendário, amizade, coleta, peixes e render portátil aprovados nos testes.</td></tr>
+            <tr><td data-i18n="tableSystemsTitle">Sistemas</td><td data-i18n="tableSystemsText">51 cultivos, 15 construções da Robin, 69 cartas, lojas sazonais, áudio XACT parcial, save `stardew_wiiu_v011r2.sav` com importação da R1.</td></tr>
+            <tr><td data-i18n="tableR2Title">R2</td><td data-i18n="tableR2Text">Cache limitado, preparação/descarte, transforms de noite/chuva, inventário invalidado sob mudança, culinária atômica original, UI com clipping/alpha.</td></tr>
+            <tr><td data-i18n="tableBuildTitle">Compilação</td><td data-i18n="tableBuildText">`stardew_explorer_v011r2.rpx` (GX2 Full HD) e `_compat.rpx` (OSScreen) no mesmo ZIP com o fonte, conforme entrega padrão.</td></tr>
+            <tr><td data-i18n="tableConsoleTitle">Console físico</td><td data-i18n="tableConsoleText">Não validado no Wii U físico nesta entrega. Validação principal no Cemu 2.6.</td></tr>
           </tbody>
         </table>
       </section>
 
       <section id="limites">
         <div class="section-label" data-i18n="scopeLabel">Escopo honesto</div>
-        <h2 data-i18n="scopeTitle">O que ainda falta construir</h2>
-        <p class="section-lead" data-i18n="scopeLead">Inventário touch permanente, arrastar e soltar, mapa com NPCs em tempo real, relacionamentos, calendário, previsão do tempo e Off-TV Play são propostas futuras — não funções disponíveis na v0.1.</p>
-        <div class="callout"><strong data-i18n="calloutImportant">Importante:</strong> <span data-i18n="calloutText">esta demonstração é executada no navegador de um computador. Não é um port jogável, um executável de Wii U nem um benchmark do console. A fazenda aparece sem construções e objetos dinâmicos; agricultura, áudio, eventos e salvamento também não estão implementados.</span></div>
-        <p class="section-lead" data-i18n="scopeDetails">O código nativo depende da toolchain devkitPro/WUT. Recursos visuais e nomes enviados podem corresponder a versões diferentes do jogo; compatibilidade ampla ainda não foi verificada.</p>
+        <h2 data-i18n="scopeTitle">O que ainda não é o jogo completo</h2>
+        <p class="section-lead" data-i18n="scopeLead">VisibleFish continua parcial. Receitas de cartas/TV/lojas, geladeiras, tempero Qi e desbloqueios completos de culinária ainda faltam. Carrinho, montaria e teletransporte não estão anunciados como concluídos. Casamento, festivais integrais, mineração completa e muitas condições especiais seguem pendentes.</p>
+        <div class="callout"><strong data-i18n="calloutImportant">Importante:</strong> <span data-i18n="calloutText">isto é um laboratório homebrew / protótipo nativo — não um port oficial nem um jogo completo. Nenhuma arte foi gerada nesta R2; o Content vem dos arquivos fornecidos. O preview no navegador permanece a demo antiga da v0.1 e não representa a R2.</span></div>
+        <p class="section-lead" data-i18n="scopeDetails">Cada versão sai em um único ZIP com executáveis e fonte. Meta 40–60 FPS é critério de validação; picos ainda existem e o hardware real não foi medido.</p>
       </section>
 
       <section id="controles">
-        <div class="section-label" data-i18n="controlsLabel">Experimente</div>
-        <h2 data-i18n="controlsTitle">Controles do preview</h2>
-        <p class="section-lead" data-i18n="controlsLead">Abra a demonstração completa direto no navegador; os recursos gerados acompanham o repositório.</p>
+        <div class="section-label" data-i18n="controlsLabel">No Cemu / console</div>
+        <h2 data-i18n="controlsTitle">Controles principais</h2>
+        <p class="section-lead" data-i18n="controlsLead">Abra o RPX no Cemu mantendo a estrutura de SD/Content da R1. Save: `stardew_wiiu_v011r2.sav` (importa a R1 e anteriores).</p>
         <ul class="controls">
-          <li><kbd data-i18n="controlArrows">Setas</kbd> / <kbd>WASD</kbd> — <span data-i18n="controlMove">mover</span></li>
-          <li><kbd>Shift</kbd> — <span data-i18n="controlRun">correr</span></li>
-          <li><kbd>M</kbd> — <span data-i18n="controlMap">mapa / jogo</span></li>
-          <li><kbd>C</kbd> — <span data-i18n="controlCollision">colisões</span></li>
-          <li><kbd>R</kbd> — <span data-i18n="controlReset">reiniciar</span></li>
-          <li data-i18n="controlGamepad">Gamepad — mapeamento depende do navegador</li>
+          <li data-i18n="controlMove">Analógico E — mover (leve = andar)</li>
+          <li data-i18n="controlInteract">A — interagir / confirmar</li>
+          <li data-i18n="controlTool">Y — ferramenta · X — inventário</li>
+          <li data-i18n="controlTabs">L/R — seleção e abas</li>
+          <li data-i18n="controlPause">+ pausa · − diário · B volta</li>
+          <li data-i18n="controlCursor">Analógico D / toque — cursor</li>
         </ul>
       </section>
 
       <div class="bottom-cta">
         <div>
-          <h2 data-i18n="ctaTitle">Quer explorar a fazenda?</h2>
-          <p data-i18n="ctaText">Abra a demonstração interativa da versão v0.1.</p>
+          <h2 data-i18n="ctaTitle">Quer ver de onde veio?</h2>
+          <p data-i18n="ctaText">A demo no navegador ainda é a v0.1 do laboratório. A R2 roda como RPX no Cemu.</p>
         </div>
-        <a class="button button-primary preview-link" href="preview/index.html" data-i18n="openPreview">▶ Abrir o PREVIEW</a>
+        <div class="cta-actions">
+          <a class="button button-primary" href="https://github.com/agonisingbasher/stardew-valley-wiiu" target="_blank" rel="noopener noreferrer" data-i18n="githubProject">Projeto no GitHub ↗</a>
+          <a class="button preview-link" href="preview/index.html" data-i18n="openPreview">▶ Preview v0.1</a>
+        </div>
       </div>
     </div>
   </main>
@@ -214,77 +275,121 @@
   <script>
     const translations = {
       en: {
-        navLabel: "Main navigation", navProject: "The project", navProgress: "Progress", navScope: "Scope",
-        languageButtonLabel: "Switch to Brazilian Portuguese", eyebrow: "Experimental lab · v0.1",
-        heroTitle: "One farm.", heroTitleSecond: "Two screens.",
-        intro: "A concept for how Stardew Valley could make use of the Wii U: the TV for exploring the farm and the GamePad as a useful second screen — starting with a technical prototype for the map, movement, and camera.",
-        openPreview: "▶ Open the PREVIEW", learnProject: "Explore the project ↓", otherProjects: "Other projects ↗", githubProject: "Project on GitHub ↗",
-        bannerAlt: "Stardew Valley on Wii U concept, with the farm on the TV and the map and inventory on the GamePad",
-        bannerCaption: "Temporary project banner; some of the features shown are still concepts.",
-        factsLabel: "Version summary", factVersion: "first experimental build", factMap: "tiles in the reconstructed farm map",
-        factScreensNumber: "2 screens", factScreens: "TV and GamePad in the concept and simulation",
-        ideaLabel: "The idea", ideaTitle: "The GamePad as part of the game",
-        ideaLead: "Instead of mirroring the TV, the touchscreen could keep the map, inventory, and town information close at hand. The current prototype takes the first steps in that direction without confusing the future vision with what is already built.",
-        cardMapNumber: "01 / MAP", cardMapTitle: "Reconstructed farm",
-        cardMapText: "The provided tBIN10 map was read and converted for the demo, with layers and visual assets organized for exploration.",
-        cardMovementNumber: "02 / MOVEMENT", cardMovementTitle: "Camera and basic collision",
-        cardMovementText: "A temporary avatar explores the scene with eight-direction movement, a tracking camera, and approximate collision.",
-        cardGamepadNumber: "03 / GAMEPAD", cardGamepadTitle: "Second-screen simulation",
-        cardGamepadText: "In the preview, the GamePad switches between the map and the game. There is also an initial C++ foundation for output on both Wii U screens.",
-        progressLabel: "v0.1 status", progressTitle: "What has been validated",
-        progressLead: "The documentation distinguishes tests run on a computer from what still requires a toolchain or a real console.",
+        navLabel: "Main navigation", navProject: "The project", navPerf: "Performance", navProgress: "Progress", navScope: "Scope",
+        languageButtonLabel: "Switch to Brazilian Portuguese",
+        eyebrow: "Experimental lab · V0.11 R2 · 2026-10-25",
+        heroTitle: "A living world.", heroTitleSecond: "Two screens. More FPS.",
+        intro: "A native Stardew Valley prototype for Wii U / Cemu: Full HD TV, independent GamePad, 48 maps, NPCs, farming — plus region cache, optimized UI, and real performance measurements.",
+        openPerf: "See measurements ↓", learnProject: "Explore R2 ↓", otherProjects: "Other projects ↗", githubProject: "Project on GitHub ↗",
+        bannerAlt: "V0.11 R2 Cemu capture: farm, original HUD, and Portuguese inventory",
+        bannerCaption: "V0.11 R2 capture on Cemu 2.6 — farm on Full HD output with the original UI.",
+        galleryLabel: "More R2 captures",
+        galleryLewisAlt: "Lewis's truck in town under rain, with corrected depth",
+        galleryLewisCaption: "Lewis's truck: depth anchored to the vehicle, without inheriting the fence.",
+        galleryConceptAlt: "Original dual-screen concept: TV and GamePad",
+        galleryConceptCaption: "The dual-screen concept that guided the lab since v0.1.",
+        factsLabel: "Version summary",
+        factVersion: "cache, UI, and cooking · 2026-10-25",
+        factMap: "maps and NPCs in the connected world",
+        factScreens: "avg FPS on Cemu (6 scenarios)",
+        ideaLabel: "The revision", ideaTitle: "What V0.11 R2 delivers",
+        ideaLead: "R2 focuses on performance and Content: bounded scene cache, arrival preparation, GamePad inventory only when it changes, night/rain lookup tables, Lewis truck depth fix, and original cooking in upgraded kitchens.",
+        cardMapNumber: "01 / CACHE", cardMapTitle: "Region and arrival",
+        cardMapText: "Up to 160 64×64 blocks with LRU eviction; draw only the camera; prepare up to two blocks per frame near doors and transitions, with no visible holes.",
+        cardMovementNumber: "02 / SCREENS", cardMovementTitle: "Full HD + GamePad",
+        cardMovementText: "1920×1080 TV via GX2, independent GamePad, inventory reused until items/money/date change, and integer world scaling by pixel doubling.",
+        cardGamepadNumber: "03 / CONTENT", cardGamepadTitle: "Cooking and Lewis",
+        cardGamepadText: "81 original recipes (80 resolved), nine upgraded-house kitchens, starter fried egg; 28 Lewis truck tiles with corrected depth (2,756 px).",
+        docCoverage: "R2 coverage", docPerf: "Performance", docHistory: "History", docDelivery: "Delivery standard",
+        perfLabel: "Measurements", perfTitle: "Performance on Cemu 2.6",
+        perfLead: "Linux/Vulkan, Mesa llvmpipe, shared host, 1920×1080 TV. Averages over 60-frame windows (first warm-up window excluded). Project target: 40 FPS minimum, 60 FPS goal — a validation criterion, not a guarantee on physical Wii U.",
+        perfScenario: "Scenario", perfAvg: "Avg FPS", perfLow: "Lowest window", perfWorst: "Worst frame", perfOver: "> 25 ms",
+        perfFarmMove: "Farm in motion", perfFarmRain: "Farm in rain", perfFarmNight: "Farm at night",
+        perfTownLewis: "Town / Lewis truck", perfTownRiver: "Town / river", perfPierre: "Pierre interior",
+        perfCallout: "averages sit above 40 FPS and several near 60 — but a continuous 40 FPS minimum is still not reached/guaranteed. The worst non-warm-up spike was 127.879 ms on the farm. Emulator, CPU, and driver affect results; this is not a physical Wii U measurement.",
+        progressLabel: "V0.11 R2 status", progressTitle: "What has been validated",
+        progressLead: "15 C++ suites, assets, ASan/UBSan, 35 captures pixel-identical to R1 (except the truck fix), 862 PowerPC asset objects compared byte-for-byte. Main and compat RPXs built.",
         tableArea: "Area", tableEvidence: "Evidence and limitations",
-        tableMapTitle: "Map loading", tableMapText: "The 80 × 65 tBIN10 file, with six layers and four tilesets, was read and converted for the prototype.",
-        tableCoreTitle: "C++ core", tableCoreText: "Tested on a computer for collision, boundaries, diagonal normalization, and a valid starting position.",
-        tablePreviewTitle: "Preview", tablePreviewText: "Integration tests with mocked DOM/canvas cover movement, restart, screen switching, boundaries, and loss of focus.",
-        tableConsoleTitle: "Wii U console", tableConsoleText: "Initial WUT-based code exists, but it has not been compiled or tested on a console for this release.",
-        tablePerformanceTitle: "Performance", tablePerformanceText: "There are no Wii U FPS measurements. The native renderer uses OSScreen and a software test viewport.",
-        scopeLabel: "Honest scope", scopeTitle: "What still needs to be built",
-        scopeLead: "A persistent touch inventory, drag and drop, a map with real-time NPCs, relationships, a calendar, weather forecasts, and Off-TV Play are future ideas — not features available in v0.1.",
-        calloutImportant: "Important:", calloutText: "this demo runs in a computer browser. It is not a playable port, a Wii U executable, or a console benchmark. The farm is shown without buildings or dynamic objects; farming, audio, events, and saving are also not implemented.",
-        scopeDetails: "The native code depends on the devkitPro/WUT toolchain. Visual assets and supplied names may correspond to different game versions; broad compatibility has not been verified.",
-        controlsLabel: "Try it", controlsTitle: "Preview controls",
-        controlsLead: "Open the full demo directly in your browser; the generated assets are included in the repository.",
-        controlArrows: "Arrows", controlMove: "move", controlRun: "run", controlMap: "map / game", controlCollision: "collisions",
-        controlReset: "restart", controlGamepad: "Gamepad — mapping depends on the browser",
-        ctaTitle: "Want to explore the farm?", ctaText: "Open the interactive v0.1 demo.",
+        tableWorldTitle: "World", tableWorldText: "48 maps, 34 NPCs, schedules, inventory, shipping, calendar, friendship, forage, fish, and portable rendering passed host tests.",
+        tableSystemsTitle: "Systems", tableSystemsText: "51 crops, 15 Robin buildings, 69 mail records, seasonal shops, partial XACT audio, save `stardew_wiiu_v011r2.sav` with R1 import.",
+        tableR2Title: "R2", tableR2Text: "Bounded cache, preparation/eviction, exact night/rain transforms, inventory invalidation on change, original atomic cooking, UI clipping/alpha.",
+        tableBuildTitle: "Build", tableBuildText: "`stardew_explorer_v011r2.rpx` (GX2 Full HD) and `_compat.rpx` (OSScreen) ship in the same ZIP as the source, per the delivery standard.",
+        tableConsoleTitle: "Physical console", tableConsoleText: "Not validated on a physical Wii U in this delivery. Primary validation is on Cemu 2.6.",
+        scopeLabel: "Honest scope", scopeTitle: "Still not the full game",
+        scopeLead: "VisibleFish remains partial. Letter/TV/shop recipes, fridges, Qi seasoning, and full cooking unlocks are still missing. Cart, mount, and teleport are not claimed as done. Marriage, full festivals, complete mining, and many special conditions remain pending.",
+        calloutImportant: "Important:",
+        calloutText: "this is a homebrew lab / native prototype — not an official port or a complete game. No art was generated in R2; Content comes from the supplied files. The browser preview is still the old v0.1 demo and does not represent R2.",
+        scopeDetails: "Each version ships as one ZIP with executables and source. The 40–60 FPS target is a validation criterion; spikes still exist and physical hardware was not measured.",
+        controlsLabel: "On Cemu / console", controlsTitle: "Main controls",
+        controlsLead: "Open the RPX in Cemu while keeping the R1 SD/Content layout. Save: `stardew_wiiu_v011r2.sav` (imports R1 and earlier).",
+        controlMove: "Left stick — move (light tilt = walk)",
+        controlInteract: "A — interact / confirm",
+        controlTool: "Y — tool · X — inventory",
+        controlTabs: "L/R — selection and tabs",
+        controlPause: "+ pause · − journal · B back",
+        controlCursor: "Right stick / touch — cursor",
+        ctaTitle: "Want to see where it started?",
+        ctaText: "The browser demo is still the lab's v0.1. R2 runs as an RPX on Cemu.",
+        openPreview: "▶ Preview v0.1",
         footerDisclaimer: "Unofficial experimental project. Stardew Valley and its assets belong to their respective owners."
       },
       "pt-BR": {
-        navLabel: "Navegação principal", navProject: "O projeto", navProgress: "Progresso", navScope: "Escopo",
-        languageButtonLabel: "Mudar para inglês", eyebrow: "Laboratório experimental · v0.1",
-        heroTitle: "Uma fazenda.", heroTitleSecond: "Duas telas.",
-        intro: "Um conceito de como Stardew Valley poderia aproveitar o Wii U: a TV para explorar a fazenda e o GamePad como uma segunda tela útil — começando por um protótipo técnico de mapa, movimento e câmera.",
-        openPreview: "▶ Abrir o PREVIEW", learnProject: "Conhecer o projeto ↓", otherProjects: "Outros projetos ↗", githubProject: "Projeto no GitHub ↗",
-        bannerAlt: "Conceito de Stardew Valley no Wii U com a fazenda na TV e o mapa e inventário no GamePad",
-        bannerCaption: "Banner provisório do projeto; algumas funções mostradas ainda são conceitos.",
-        factsLabel: "Resumo da versão", factVersion: "primeira base experimental", factMap: "blocos no mapa da fazenda reconstruído",
-        factScreensNumber: "2 telas", factScreens: "TV e GamePad no conceito e na simulação",
-        ideaLabel: "A ideia", ideaTitle: "O GamePad como parte do jogo",
-        ideaLead: "Em vez de espelhar a TV, a tela de toque poderia manter mapa, inventário e informações da vila sempre à mão. O protótipo atual dá os primeiros passos nessa direção, sem confundir a visão futura com o que já está pronto.",
-        cardMapNumber: "01 / MAPA", cardMapTitle: "Fazenda reconstruída",
-        cardMapText: "O mapa tBIN10 fornecido foi lido e convertido para a demonstração, com camadas e recursos visuais organizados para exploração.",
-        cardMovementNumber: "02 / MOVIMENTO", cardMovementTitle: "Câmera e colisão básica",
-        cardMovementText: "Um avatar temporário percorre o cenário com movimento em oito direções, câmera de acompanhamento e colisão aproximada.",
-        cardGamepadNumber: "03 / GAMEPAD", cardGamepadTitle: "Simulação da segunda tela",
-        cardGamepadText: "No preview, o GamePad alterna entre mapa e jogo. Há também uma base inicial em C++ para saída nas duas telas do Wii U.",
-        progressLabel: "Estado da v0.1", progressTitle: "O que já foi validado",
-        progressLead: "A documentação separa os testes que foram executados no computador do que ainda precisa de toolchain ou console real.",
+        navLabel: "Navegação principal", navProject: "O projeto", navPerf: "Desempenho", navProgress: "Progresso", navScope: "Escopo",
+        languageButtonLabel: "Mudar para inglês",
+        eyebrow: "Laboratório experimental · V0.11 R2 · 25/10/2026",
+        heroTitle: "Mundo vivo.", heroTitleSecond: "Duas telas. Mais FPS.",
+        intro: "Protótipo nativo de Stardew Valley para Wii U / Cemu: TV Full HD, GamePad independente, 48 mapas, NPCs, agricultura e agora cache por região, UI otimizada e medições reais de desempenho.",
+        openPerf: "Ver medições ↓", learnProject: "Conhecer a R2 ↓", otherProjects: "Outros projetos ↗", githubProject: "Projeto no GitHub ↗",
+        bannerAlt: "Captura da V0.11 R2 no Cemu: fazenda, HUD original e inventário em português",
+        bannerCaption: "Captura da V0.11 R2 no Cemu 2.6 — fazenda na saída Full HD com interface original.",
+        galleryLabel: "Mais capturas da R2",
+        galleryLewisAlt: "Carro do Lewis na cidade sob chuva, com profundidade corrigida",
+        galleryLewisCaption: "Carro do Lewis: profundidade ancorada no veículo, sem herdar a cerca.",
+        galleryConceptAlt: "Conceito original das duas telas: TV e GamePad",
+        galleryConceptCaption: "Conceito das duas telas que guiou o laboratório desde a v0.1.",
+        factsLabel: "Resumo da versão",
+        factVersion: "cache, UI e culinária · 25/10/2026",
+        factMap: "mapas e NPCs no mundo conectado",
+        factScreens: "FPS médio no Cemu (6 cenários)",
+        ideaLabel: "A revisão", ideaTitle: "O que a V0.11 R2 entrega",
+        ideaLead: "A R2 foca em desempenho e Content: cache limitado do cenário, preparação de chegada, inventário do GamePad só quando muda, iluminação/chuva por tabelas, carro do Lewis corrigido e culinária original nas cozinhas melhoradas.",
+        cardMapNumber: "01 / CACHE", cardMapTitle: "Região e chegada",
+        cardMapText: "Até 160 blocos 64×64 com descarte LRU; desenho só da câmera; preparação de até dois blocos por quadro perto de portas e transições, sem buracos visuais.",
+        cardMovementNumber: "02 / TELAS", cardMovementTitle: "Full HD + GamePad",
+        cardMovementText: "TV 1920×1080 via GX2, GamePad independente, inventário reaproveitado até itens/dinheiro/data mudarem, e escala inteira do mundo por duplicação de pixels.",
+        cardGamepadNumber: "03 / CONTENT", cardGamepadTitle: "Culinária e Lewis",
+        cardGamepadText: "81 receitas originais (80 resolvidas), nove cozinhas das casas melhoradas, ovo frito inicial; 28 tiles do carro do Lewis com profundidade corrigida (2.756 px).",
+        docCoverage: "Cobertura R2", docPerf: "Desempenho", docHistory: "Histórico", docDelivery: "Entrega padrão",
+        perfLabel: "Medições", perfTitle: "Desempenho no Cemu 2.6",
+        perfLead: "Linux/Vulkan, Mesa llvmpipe, host compartilhado, TV 1920×1080. Médias em janelas de 60 quadros (sem a primeira janela de aquecimento). Meta do projeto: mínimo 40 FPS, alvo 60 FPS — critério de validação, não garantia no Wii U físico.",
+        perfScenario: "Cenário", perfAvg: "FPS médio", perfLow: "Menor janela", perfWorst: "Pior quadro", perfOver: "> 25 ms",
+        perfFarmMove: "Fazenda em movimento", perfFarmRain: "Fazenda com chuva", perfFarmNight: "Fazenda à noite",
+        perfTownLewis: "Cidade / carro Lewis", perfTownRiver: "Cidade / rio", perfPierre: "Interior Pierre",
+        perfCallout: "médias acima de 40 FPS e várias próximas de 60 — mas o mínimo contínuo de 40 FPS ainda não foi atingido/garantido. O pior pico fora do aquecimento foi 127,879 ms na fazenda. Emulador, processador e driver influenciam o resultado; não é medição do Wii U físico.",
+        progressLabel: "Estado da V0.11 R2", progressTitle: "O que já foi validado",
+        progressLead: "15 suítes C++, assets, ASan/UBSan, 35 capturas com pixels idênticos à R1 (exceto a correção do carro), 862 objetos PowerPC comparados byte a byte. RPXs principal e compat compilados.",
         tableArea: "Área", tableEvidence: "Evidência e limite",
-        tableMapTitle: "Leitura do mapa", tableMapText: "O arquivo tBIN10 de 80 × 65 blocos, seis camadas e quatro tilesets foi lido e convertido para o protótipo.",
-        tableCoreTitle: "Núcleo C++", tableCoreText: "Testado no computador para colisão, limites, normalização diagonal e posição inicial válida.",
-        tablePreviewTitle: "Preview", tablePreviewText: "Teste de integração com DOM/canvas simulados cobre movimento, reinício, troca de tela, limites e perda de foco.",
-        tableConsoleTitle: "Console Wii U", tableConsoleText: "Código inicial baseado em WUT existe, mas não foi compilado nem testado no console nesta entrega.",
-        tablePerformanceTitle: "Desempenho", tablePerformanceText: "Não há medição de FPS no Wii U. O renderer nativo usa OSScreen e um viewport de teste por software.",
-        scopeLabel: "Escopo honesto", scopeTitle: "O que ainda falta construir",
-        scopeLead: "Inventário touch permanente, arrastar e soltar, mapa com NPCs em tempo real, relacionamentos, calendário, previsão do tempo e Off-TV Play são propostas futuras — não funções disponíveis na v0.1.",
-        calloutImportant: "Importante:", calloutText: "esta demonstração é executada no navegador de um computador. Não é um port jogável, um executável de Wii U nem um benchmark do console. A fazenda aparece sem construções e objetos dinâmicos; agricultura, áudio, eventos e salvamento também não estão implementados.",
-        scopeDetails: "O código nativo depende da toolchain devkitPro/WUT. Recursos visuais e nomes enviados podem corresponder a versões diferentes do jogo; compatibilidade ampla ainda não foi verificada.",
-        controlsLabel: "Experimente", controlsTitle: "Controles do preview",
-        controlsLead: "Abra a demonstração completa direto no navegador; os recursos gerados acompanham o repositório.",
-        controlArrows: "Setas", controlMove: "mover", controlRun: "correr", controlMap: "mapa / jogo", controlCollision: "colisões",
-        controlReset: "reiniciar", controlGamepad: "Gamepad — mapeamento depende do navegador",
-        ctaTitle: "Quer explorar a fazenda?", ctaText: "Abra a demonstração interativa da versão v0.1.",
+        tableWorldTitle: "Mundo", tableWorldText: "48 mapas, 34 NPCs, agendas, inventário, remessa, calendário, amizade, coleta, peixes e render portátil aprovados nos testes.",
+        tableSystemsTitle: "Sistemas", tableSystemsText: "51 cultivos, 15 construções da Robin, 69 cartas, lojas sazonais, áudio XACT parcial, save `stardew_wiiu_v011r2.sav` com importação da R1.",
+        tableR2Title: "R2", tableR2Text: "Cache limitado, preparação/descarte, transforms de noite/chuva, inventário invalidado sob mudança, culinária atômica original, UI com clipping/alpha.",
+        tableBuildTitle: "Compilação", tableBuildText: "`stardew_explorer_v011r2.rpx` (GX2 Full HD) e `_compat.rpx` (OSScreen) no mesmo ZIP com o fonte, conforme entrega padrão.",
+        tableConsoleTitle: "Console físico", tableConsoleText: "Não validado no Wii U físico nesta entrega. Validação principal no Cemu 2.6.",
+        scopeLabel: "Escopo honesto", scopeTitle: "O que ainda não é o jogo completo",
+        scopeLead: "VisibleFish continua parcial. Receitas de cartas/TV/lojas, geladeiras, tempero Qi e desbloqueios completos de culinária ainda faltam. Carrinho, montaria e teletransporte não estão anunciados como concluídos. Casamento, festivais integrais, mineração completa e muitas condições especiais seguem pendentes.",
+        calloutImportant: "Importante:",
+        calloutText: "isto é um laboratório homebrew / protótipo nativo — não um port oficial nem um jogo completo. Nenhuma arte foi gerada nesta R2; o Content vem dos arquivos fornecidos. O preview no navegador permanece a demo antiga da v0.1 e não representa a R2.",
+        scopeDetails: "Cada versão sai em um único ZIP com executáveis e fonte. Meta 40–60 FPS é critério de validação; picos ainda existem e o hardware real não foi medido.",
+        controlsLabel: "No Cemu / console", controlsTitle: "Controles principais",
+        controlsLead: "Abra o RPX no Cemu mantendo a estrutura de SD/Content da R1. Save: `stardew_wiiu_v011r2.sav` (importa a R1 e anteriores).",
+        controlMove: "Analógico E — mover (leve = andar)",
+        controlInteract: "A — interagir / confirmar",
+        controlTool: "Y — ferramenta · X — inventário",
+        controlTabs: "L/R — seleção e abas",
+        controlPause: "+ pausa · − diário · B volta",
+        controlCursor: "Analógico D / toque — cursor",
+        ctaTitle: "Quer ver de onde veio?",
+        ctaText: "A demo no navegador ainda é a v0.1 do laboratório. A R2 roda como RPX no Cemu.",
+        openPreview: "▶ Preview v0.1",
         footerDisclaimer: "Projeto experimental e não oficial. Stardew Valley e seus recursos pertencem aos respectivos titulares."
       }
     };
@@ -317,11 +422,11 @@
       const content = translations[language];
       document.documentElement.lang = language === "en" ? "en" : "pt-BR";
       document.title = language === "en"
-        ? "Stardew Valley for Wii U — Lab v0.1"
-        : "Stardew Valley para Wii U — Laboratório v0.1";
+        ? "Stardew Valley for Wii U — Lab V0.11 R2"
+        : "Stardew Valley para Wii U — Laboratório V0.11 R2";
       document.querySelector('meta[name="description"]').content = language === "en"
-        ? "An experimental prototype exploring how Stardew Valley could make use of the Wii U TV and GamePad."
-        : "Um protótipo experimental que explora como Stardew Valley poderia aproveitar a TV e o GamePad do Wii U.";
+        ? "Experimental Stardew Valley prototype for Wii U / Cemu — V0.11 R2 with Full HD TV, independent GamePad, and performance measurements."
+        : "Protótipo experimental de Stardew Valley para Wii U / Cemu — V0.11 R2 com TV Full HD, GamePad independente e medições de desempenho.";
       document.querySelectorAll("[data-i18n]").forEach((element) => {
         element.textContent = content[element.dataset.i18n];
       });
