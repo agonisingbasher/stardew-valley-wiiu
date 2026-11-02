@@ -37,6 +37,8 @@
     .nav a:hover { color: var(--text); }
     .language-toggle { padding: 6px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); color: var(--text); font: inherit; font-size: .85rem; font-weight: 700; cursor: pointer; }
     .language-toggle:hover { border-color: var(--green); color: var(--green); }
+    .language-switch { display: inline-flex; flex-wrap: wrap; gap: 5px; }
+    .language-toggle[aria-pressed="true"] { border-color: var(--green); background: var(--green); color: #16241a; }
     .hero { padding: 48px 0 34px; }
     .eyebrow { color: var(--gold); font-size: .78rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
     h1 { max-width: 900px; margin: 14px 0; font-size: clamp(2.5rem, 7vw, 5.1rem); line-height: .99; letter-spacing: -.055em; }
@@ -119,7 +121,12 @@
       <a href="#progresso" data-i18n="navProgress">Progresso</a>
       <a href="#limites" data-i18n="navScope">Escopo</a>
       <a class="lang-link" href="docs/feedback.html?categoria=Stardew%20Valley" data-i18n="navFeedback">Feedback</a>
-      <button class="language-toggle" type="button" aria-label="Switch to English" data-i18n-aria-label="languageButtonLabel">EN</button>
+      <span class="language-switch" role="group">
+        <button class="language-toggle" type="button" data-lang-option="pt-BR" lang="pt" aria-label="Português">PT</button>
+        <button class="language-toggle" type="button" data-lang-option="en" lang="en" aria-label="English">EN</button>
+        <button class="language-toggle" type="button" data-lang-option="es" lang="es" aria-label="Español">ES</button>
+        <button class="language-toggle" type="button" data-lang-option="fr" lang="fr" aria-label="Français">FR</button>
+      </span>
     </nav>
   </header>
 
@@ -395,72 +402,114 @@
         footerDisclaimer: "Projeto experimental e não oficial. Stardew Valley e seus recursos pertencem aos respectivos titulares."
       }
     };
-    const languageButton = document.querySelector(".language-toggle");
+    translations.es = {"navLabel":"Navegación principal","navProject":"el proyecto","navPerf":"Actuación","navProgress":"Progreso","navScope":"Alcance","navFeedback":"Comentario","languageButtonLabel":"Cambiar al inglés","eyebrow":"Laboratorio experimental · V0.11 R2 · 25/10/2026","heroTitle":"Mundo vivo.","heroTitleSecond":"Dos pantallas. Más FPS.","intro":"Prototipo nativo de Stardew Valley para Wii U/Cemu: TV Full HD, GamePad independiente, 48 mapas, NPC, agricultura y ahora caché por región, UI optimizada y mediciones de rendimiento reales.","openPerf":"Ver medidas ↓","learnProject":"Conozca R2 ↓","otherProjects":"Otros proyectos ↗","githubProject":"Proyecto en GitHub ↗","bannerAlt":"Captura de V0.11 R2 en Cemu: granja, HUD original e inventario en portugués","bannerCaption":"Captura de V0.11 R2 en Cemu 2.6: granja en salida Full HD con interfaz original.","galleryLabel":"Más capturas de R2","galleryLewisAlt":"El coche de Lewis en la ciudad bajo la lluvia, con profundidad corregida","galleryLewisCaption":"Coche Lewis: anclado en profundidad en el vehículo, sin heredar la valla.","galleryConceptAlt":"Concepto original de dos pantallas: TV y GamePad","galleryConceptCaption":"Concepto de las dos pantallas que guiaron el laboratorio desde la v0.1.","factsLabel":"Resumen de versión","factVersion":"caché, interfaz de usuario y cocina · 25/10/2026","factMap":"mapas y NPC en el mundo conectado","factScreens":"FPS promedio en Cemu (6 escenarios)","ideaLabel":"la revisión","ideaTitle":"Lo que ofrece V0.11 R2","ideaLead":"R2 se centra en el rendimiento y el contenido: caché de escenas limitado, preparación de llegada, inventario del GamePad solo cuando cambia, iluminación/lluvia en las mesas, auto de Lewis corregido y cocina original en las cocinas mejoradas.","cardMapNumber":"01 / CACHÉ","cardMapTitle":"Región y llegada","cardMapText":"Hasta 160 bloques de 64x64 con descarte LRU; diseño de sólo cámara; preparando hasta dos bloques por marco cerca de puertas y transiciones, sin agujeros visuales.","cardMovementNumber":"02 / PANTALLAS","cardMovementTitle":"Full HD + mando de juego","cardMovementText":"TV de 1920×1080 a través de GX2, GamePad independiente, inventario reutilizado hasta que cambien los artículos/dinero/fecha y escala mundial completa al duplicar los píxeles.","cardGamepadNumber":"03 / CONTENIDO","cardGamepadTitle":"Cocina y Lewis","cardGamepadText":"81 recetas originales (80 resueltas), nueve cocinas caseras mejoradas, huevo frito inicial; 28 mosaicos del auto de Lewis con profundidad corregida (2756 px).","docCoverage":"Cobertura R2","docPerf":"Actuación","docHistory":"Historia","docDelivery":"Entrega estándar","docFeedback":"Comentario","perfLabel":"Medidas","perfTitle":"Rendimiento en Cemu 2.6","perfLead":"Linux/Vulkan, Mesa llvmpipe, host compartido, TV 1920×1080. Promedia más de ventanas de 60 marcos (sin la primera ventana de calentamiento). Objetivo del proyecto: mínimo 40 FPS, objetivo 60 FPS: criterios de validación, no garantizados en Wii U física.","perfScenario":"Guión","perfAvg":"FPS promedio","perfLow":"ventana más pequeña","perfWorst":"peor foto","perfOver":"> 25 ms","perfFarmMove":"Granja en movimiento","perfFarmRain":"Granja con lluvia","perfFarmNight":"granja de noche","perfTownLewis":"Coche urbano/Lewis","perfTownRiver":"ciudad/río","perfPierre":"Interior Pedro","perfCallout":"promedios superiores a 40 FPS y varios cercanos a 60, pero el mínimo continuo de 40 FPS aún no se ha alcanzado ni garantizado. El peor pico fuera de la calefacción fue de 127,879 ms en la granja. El emulador, el procesador y el controlador influyen en el resultado; No es una medida de la Wii U física.","progressLabel":"Estado V0.11 R2","progressTitle":"Lo que ya ha sido validado","progressLead":"15 suites C++, activos, ASan/UBSan, 35 capturas con píxeles idénticos a R1 (excepto la corrección del automóvil), 862 objetos PowerPC comparados byte por byte. RPX principales y compatibles compilados.","tableArea":"Área","tableEvidence":"Evidencia y límite","tableWorldTitle":"Mundo","tableWorldText":"48 mapas, 34 NPC, agendas, inventario, envío, calendario, amistad, colección, peces y renderizado portátil pasaron las pruebas.","tableSystemsTitle":"Sistemas","tableSystemsText":"51 cultivos, 15 edificios Robin, 69 tarjetas, tiendas de temporada, audio XACT parcial, guarde `stardew_wiiu_v011r2.sav` con importación desde R1.","tableR2Title":"R2","tableR2Text":"Caché limitado, preparación/descarte, transformaciones de noche/lluvia, inventario invalidado bajo cambio, cocción atómica original, interfaz de usuario con recorte/alfa.","tableBuildTitle":"Compilación","tableBuildText":"`stardew_explorer_v011r2.rpx` (GX2 Full HD) y `_compat.rpx` (OSScreen) en el mismo ZIP que el código fuente, según entrega estándar.","tableConsoleTitle":"Consola física","tableConsoleText":"No validado en Wii U física en esta entrega. Validación principal en Cemu 2.6.","scopeLabel":"Alcance honesto","scopeTitle":"Que aun no es el juego completo","scopeLead":"VisibleFish sigue siendo parcial. Aún faltan recetas de tarjetas/TV/tiendas, refrigeradores, condimentos Qi y desbloqueos completos de cocina. El carro, la montura y el teletransporte no se anuncian como completos. Quedan pendientes bodas, fiestas completas, minería completa y muchas condiciones especiales.","calloutImportant":"Importante:","calloutText":"Este es un prototipo nativo/de laboratorio casero, no un port oficial ni un juego completo. No se generó ningún arte en este R2; el Contenido proviene de los archivos proporcionados. La vista previa del navegador sigue siendo la antigua demostración v0.1 y no representa R2.","scopeDetails":"Cada versión viene en un único ZIP con ejecutables y código fuente. El objetivo de 40 a 60 FPS es un criterio de validación; Todavía existen picos y no se ha medido el hardware real.","controlsLabel":"En Cemu/consola","controlsTitle":"Controles principales","controlsLead":"Abra RPX en Cemu manteniendo la estructura SD/Contenido de R1. Guardar: `stardew_wiiu_v011r2.sav` (importa R1 y versiones anteriores).","controlMove":"Analógico E: moverse (luz = caminar)","controlInteract":"A - interactuar / confirmar","controlTool":"Y — herramienta · X — inventario","controlTabs":"L/R: selección y pestañas","controlPause":"+ descanso · − diario · B regresar","controlCursor":"Analógico D/táctil: cursor","ctaTitle":"¿Quieres ver de dónde vino?","ctaText":"La demostración del navegador todavía es la versión 0.1 del laboratorio. El R2 se ejecuta como RPX en Cemu.","openPreview":"▶ Vista previa v0.1","footerDisclaimer":"Proyecto experimental y no oficial. Stardew Valley y sus recursos pertenecen a sus respectivos dueños."};
+translations.fr = {"navLabel":"Navigation principale","navProject":"Le projet","navPerf":"Performance","navProgress":"Progrès","navScope":"Portée","navFeedback":"Retour","languageButtonLabel":"Passer à l'anglais","eyebrow":"Laboratoire expérimental · V0.11 R2 · 25/10/2026","heroTitle":"Monde vivant.","heroTitleSecond":"Deux écrans. Plus de SPF.","intro":"Prototype natif de Stardew Valley pour Wii U / Cemu : TV Full HD, GamePad indépendant, 48 cartes, PNJ, farm et désormais cache par région, UI optimisée et mesures de performances réelles.","openPerf":"Afficher les mesures ↓","learnProject":"Apprenez à connaître R2 ↓","otherProjects":"Autres projets ↗","githubProject":"Projet sur GitHub ↗","bannerAlt":"Capture de la V0.11 R2 sur Cemu : ferme, HUD original et inventaire en portugais","bannerCaption":"Capture de la V0.11 R2 dans Cemu 2.6 — ferme en sortie Full HD avec interface originale.","galleryLabel":"Plus de captures de R2","galleryLewisAlt":"La voiture de Lewis en ville sous la pluie, avec profondeur corrigée","galleryLewisCaption":"Voiture Lewis : ancrée en profondeur dans le véhicule, sans hériter de la clôture.","galleryConceptAlt":"Concept original de deux écrans : TV et GamePad","galleryConceptCaption":"Concept des deux écrans qui guident le laboratoire depuis la v0.1.","factsLabel":"Résumé des versions","factVersion":"cache, interface utilisateur et cuisine · 25/10/2026","factMap":"cartes et PNJ dans le monde connecté","factScreens":"FPS moyen sur Cemu (6 scénarios)","ideaLabel":"La revue","ideaTitle":"Ce que propose la V0.11 R2","ideaLead":"R2 se concentre sur les performances et le contenu : cache de scène limité, préparation à l'arrivée, inventaire du GamePad uniquement lorsqu'il change, éclairage/pluie par tables, voiture de Lewis corrigée et cuisine originale dans les cuisines améliorées.","cardMapNumber":"01 / CACHES","cardMapTitle":"Région et arrivée","cardMapText":"Jusqu'à 160 blocs 64x64 avec suppression LRU ; conception avec caméra uniquement ; préparer jusqu'à deux blocs par cadre à proximité des portes et des transitions, sans trous visuels.","cardMovementNumber":"02 / ÉCRANS","cardMovementTitle":"Full HD + GamePad","cardMovementText":"TV 1920 × 1080 via GX2, GamePad indépendant, inventaire réutilisé jusqu'à ce que les objets/argent/date changent et échelle mondiale entière en doublant les pixels.","cardGamepadNumber":"03 / CONTENU","cardGamepadTitle":"La cuisine et Lewis","cardGamepadText":"81 recettes originales (80 résolues), neuf cuisines améliorées, un œuf au plat initial ; 28 tuiles de la voiture de Lewis avec profondeur corrigée (2 756 px).","docCoverage":"Couverture R2","docPerf":"Performance","docHistory":"Histoire","docDelivery":"Livraison standard","docFeedback":"Retour","perfLabel":"Mesures","perfTitle":"Performances dans Cemu 2.6","perfLead":"Linux/Vulkan, Mesa llvmpipe, hôte partagé, TV 1920×1080. Moyenne sur des fenêtres de 60 images (sans la première fenêtre d'échauffement). Objectif du projet : minimum 40 FPS, objectif 60 FPS — critères de validation, non garantis sur Wii U physique.","perfScenario":"Scénario","perfAvg":"FPS moyen","perfLow":"La plus petite fenêtre","perfWorst":"La pire photo","perfOver":"> 25 ms","perfFarmMove":"Une ferme en mouvement","perfFarmRain":"Ferme avec pluie","perfFarmNight":"Ferme la nuit","perfTownLewis":"Voiture de ville/Lewis","perfTownRiver":"Ville/rivière","perfPierre":"Intérieur Pierre","perfCallout":"des moyennes supérieures à 40 FPS et plusieurs proches de 60 — mais le minimum continu de 40 FPS n'a pas encore été atteint/garanti. Le pire pic en dehors du chauffage a été de 127,879 ms à la ferme. L'émulateur, le processeur et le pilote influencent le résultat ; Ce n'est pas une mesure de la Wii U physique.","progressLabel":"Statut V0.11 R2","progressTitle":"Ce qui a déjà été validé","progressLead":"15 suites C++, assets, ASan/UBSan, 35 captures avec pixels identiques à R1 (sauf la correction voiture), 862 objets PowerPC comparés octet par octet. RPX principaux et compatibles compilés.","tableArea":"Zone","tableEvidence":"Preuve et limite","tableWorldTitle":"Monde","tableWorldText":"48 cartes, 34 PNJ, agendas, inventaire, expédition, calendrier, amitié, collection, poisson et rendu portable ont réussi les tests.","tableSystemsTitle":"Systèmes","tableSystemsText":"51 cultures, 15 bâtiments Robin, 69 cartes, magasins saisonniers, audio XACT partiel, sauvegarde `stardew_wiiu_v011r2.sav` avec importation depuis R1.","tableR2Title":"R2","tableR2Text":"Cache limité, préparation/défausse, transformations nuit/pluie, inventaire invalidé lors du changement, cuisine atomique originale, interface utilisateur avec découpage/alpha.","tableBuildTitle":"Compilation","tableBuildText":"`stardew_explorer_v011r2.rpx` (GX2 Full HD) et `_compat.rpx` (OSScreen) dans le même ZIP que la source, selon la livraison standard.","tableConsoleTitle":"Console physique","tableConsoleText":"Non validé sur Wii U physique dans cette livraison. Validation principale dans Cemu 2.6.","scopeLabel":"Portée honnête","scopeTitle":"Ce qui n'est pas encore le jeu complet","scopeLead":"VisibleFish reste biaisé. Les recettes des cartes/TV/magasins, des réfrigérateurs, des assaisonnements Qi et des déblocages de cuisine complets sont toujours manquants. Chariot, monture et téléportation ne sont pas annoncés comme complets. Les mariages, les festivals complets, l'exploitation minière complète et de nombreuses conditions spéciales restent en suspens.","calloutImportant":"Important:","calloutText":"Il s’agit d’un prototype homebrew lab/natif – pas d’un portage officiel ni d’un jeu complet. Aucune illustration n'a été générée dans cette R2 ; le Contenu provient des fichiers fournis. L'aperçu du navigateur reste l'ancienne démo v0.1 et ne représente pas R2.","scopeDetails":"Chaque version est livrée dans un seul ZIP avec les exécutables et la source. L'objectif de 40 à 60 FPS est un critère de validation ; des pics existent toujours et le matériel réel n’a pas été mesuré.","controlsLabel":"Dans Cemu / console","controlsTitle":"Commandes principales","controlsLead":"Ouvrez RPX dans Cemu en conservant la structure R1 SD/Content. Enregistrez : `stardew_wiiu_v011r2.sav` (importe R1 et versions antérieures).","controlMove":"Analogique E - bouger (lumière = marcher)","controlInteract":"A - interagir / confirmer","controlTool":"Y — outil · X — inventaire","controlTabs":"L/R — sélection et onglets","controlPause":"+ pause · − journal · B retour","controlCursor":"Analogique D/touch — curseur","ctaTitle":"Vous voulez voir d'où ça vient ?","ctaText":"La démo du navigateur est toujours la v0.1 du laboratoire. Le R2 fonctionne comme RPX sur Cemu.","openPreview":"▶ Aperçu v0.1","footerDisclaimer":"Projet expérimental et non officiel. Stardew Valley et ses ressources appartiennent à leurs propriétaires respectifs."};
+const languageButtons = document.querySelectorAll(".language-toggle");
     const viewCounter = document.querySelector(".view-counter img");
+    const LANGUAGES = ["pt-BR", "en", "es", "fr"];
     const languageStorageKey = "stardew-wiiu-language";
-    const requestedLanguage = new URLSearchParams(window.location.search).get("lang");
-    let currentLanguage = requestedLanguage === "en" || requestedLanguage === "pt-BR"
-      ? requestedLanguage
-      : "pt-BR";
+    const pageMetaDescription = document.querySelector('meta[name="description"]');
+    const PAGE_TITLES = {
+      "pt-BR": "Stardew Valley para Wii U — Laboratório V0.11 R2",
+      en: "Stardew Valley for Wii U — Lab V0.11 R2",
+      es: "Stardew Valley para Wii U — Laboratorio V0.11 R2",
+      fr: "Stardew Valley pour Wii U — Laboratoire V0.11 R2"
+    };
+    const PAGE_DESCRIPTIONS = {
+      "pt-BR": "Protótipo experimental de Stardew Valley para Wii U / Cemu — V0.11 R2 com TV Full HD, GamePad independente e medições de desempenho.",
+      en: "Experimental Stardew Valley prototype for Wii U / Cemu — V0.11 R2 with Full HD TV, independent GamePad, and performance measurements.",
+      es: "Prototipo experimental de Stardew Valley para Wii U / Cemu — V0.11 R2 con TV Full HD, GamePad independiente y mediciones de rendimiento.",
+      fr: "Prototype expérimental de Stardew Valley pour Wii U / Cemu — V0.11 R2 avec TV Full HD, GamePad indépendant et mesures de performance."
+    };
+    const originalText = new Map();
+    document.querySelectorAll("[data-i18n]").forEach((element) => originalText.set(element, element.textContent));
+    const originalAlt = new Map();
+    document.querySelectorAll("[data-i18n-alt]").forEach((element) => originalAlt.set(element, element.getAttribute("alt")));
+    const originalAria = new Map();
+    document.querySelectorAll("[data-i18n-aria-label]").forEach((element) => originalAria.set(element, element.getAttribute("aria-label")));
 
-    if (requestedLanguage !== "en" && requestedLanguage !== "pt-BR") {
+    function normalizeLanguage(value) {
+      if (value === "pt") return "pt-BR";
+      return LANGUAGES.includes(value) ? value : null;
+    }
+
+    function readStoredLanguage() {
       try {
-        const storedLanguage = localStorage.getItem(languageStorageKey);
-        if (storedLanguage === "en" || storedLanguage === "pt-BR") {
-          currentLanguage = storedLanguage;
-        }
+        return normalizeLanguage(localStorage.getItem(languageStorageKey));
       } catch (error) {
         if (error.name !== "SecurityError") throw error;
+        return null;
       }
     }
 
+    /* Sem ?lang= na URL e sem escolha gravada, o navegador decide: quem abre de Buenos
+       Aires ve espanhol, quem abre de Paris ve frances. Um pt de qualquer pais continua
+       em pt-BR, que e a unica variante portuguesa que temos. */
+    function detectLanguage() {
+      const preferred = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language];
+      for (const tag of preferred) {
+        if (!tag) continue;
+        const base = String(tag).toLowerCase().split("-")[0];
+        if (base === "pt") return "pt-BR";
+        const match = LANGUAGES.find((code) => code.toLowerCase() === base);
+        if (match) return match;
+      }
+      return "pt-BR";
+    }
+
+    const requestedLanguage = normalizeLanguage(new URLSearchParams(window.location.search).get("lang"));
+    let currentLanguage = requestedLanguage || readStoredLanguage() || detectLanguage();
+
     function setLanguage(language) {
-      currentLanguage = language;
+      currentLanguage = normalizeLanguage(language) || "pt-BR";
       try {
-        localStorage.setItem(languageStorageKey, language);
+        localStorage.setItem(languageStorageKey, currentLanguage);
       } catch (error) {
         if (error.name !== "SecurityError") throw error;
       }
-      const content = translations[language];
-      document.documentElement.lang = language === "en" ? "en" : "pt-BR";
-      document.title = language === "en"
-        ? "Stardew Valley for Wii U — Lab V0.11 R2"
-        : "Stardew Valley para Wii U — Laboratório V0.11 R2";
-      document.querySelector('meta[name="description"]').content = language === "en"
-        ? "Experimental Stardew Valley prototype for Wii U / Cemu — V0.11 R2 with Full HD TV, independent GamePad, and performance measurements."
-        : "Protótipo experimental de Stardew Valley para Wii U / Cemu — V0.11 R2 com TV Full HD, GamePad independente e medições de desempenho.";
+      const content = translations[currentLanguage] || {};
+      /* Uma chave ausente no dict nao pode apagar o texto da pagina: o portugues que ja
+         esta no HTML e a fonte e continua aparecendo. */
+      const pick = (key, fallback) => (content[key] !== undefined ? content[key] : fallback);
+      document.documentElement.lang = currentLanguage;
+      document.title = PAGE_TITLES[currentLanguage];
+      if (pageMetaDescription) pageMetaDescription.content = PAGE_DESCRIPTIONS[currentLanguage];
       document.querySelectorAll("[data-i18n]").forEach((element) => {
-        element.textContent = content[element.dataset.i18n];
+        element.textContent = pick(element.dataset.i18n, originalText.get(element));
       });
       document.querySelectorAll("[data-i18n-alt]").forEach((element) => {
-        element.alt = content[element.dataset.i18nAlt];
+        element.alt = pick(element.dataset.i18nAlt, originalAlt.get(element));
       });
       document.querySelectorAll("[data-i18n-aria-label]").forEach((element) => {
-        element.setAttribute("aria-label", content[element.dataset.i18nAriaLabel]);
+        const value = pick(element.dataset.i18nAriaLabel, originalAria.get(element));
+        if (value) element.setAttribute("aria-label", value);
       });
-      languageButton.textContent = language === "en" ? "PT-BR" : "EN";
+      languageButtons.forEach((button) => {
+        button.setAttribute("aria-pressed", String(normalizeLanguage(button.dataset.langOption) === currentLanguage));
+      });
       document.querySelectorAll(".preview-link").forEach((link) => {
-        const previewUrl = new URL(link.href);
-        previewUrl.searchParams.set("lang", language);
-        link.href = previewUrl;
+        const previewUrl = new URL(link.href, window.location.href);
+        previewUrl.searchParams.set("lang", currentLanguage);
+        link.href = previewUrl.href;
       });
       document.querySelectorAll(".doc-links a").forEach((link) => {
-        const docUrl = new URL(link.href);
-        docUrl.searchParams.set("lang", language);
-        link.href = docUrl;
+        const docUrl = new URL(link.href, window.location.href);
+        docUrl.searchParams.set("lang", currentLanguage);
+        link.href = docUrl.href;
       });
       document.querySelectorAll(".lang-link").forEach((link) => {
         const targetUrl = new URL(link.href, window.location.href);
-        targetUrl.searchParams.set("lang", language);
+        targetUrl.searchParams.set("lang", currentLanguage);
         link.href = targetUrl.href;
       });
       const pageUrl = new URL(window.location.href);
-      pageUrl.searchParams.set("lang", language);
+      pageUrl.searchParams.set("lang", currentLanguage);
       history.replaceState(null, "", pageUrl);
+      document.dispatchEvent(new CustomEvent("languagechange", { detail: { language: currentLanguage } }));
     }
 
-    languageButton.addEventListener("click", () => {
-      setLanguage(currentLanguage === "pt-BR" ? "en" : "pt-BR");
+    languageButtons.forEach((button) => {
+      button.addEventListener("click", () => setLanguage(button.dataset.langOption));
     });
     setLanguage(currentLanguage);
 
@@ -472,6 +521,6 @@
       viewCounter.src = badgeUrl.toString();
     }
   </script>
-<script>(()=>{const b=document.querySelector('.language-toggle');if(!b)return;const box=document.createElement('span');box.style.cssText='display:inline-flex;gap:6px;margin-left:6px';for(const [code,label] of [['es','ES'],['fr','FR']]){const a=document.createElement('a');const u=new URL(location.href);u.searchParams.set('lang','pt-BR');a.href=`https://translate.google.com/translate?sl=pt&tl=${code}&u=${encodeURIComponent(u.href)}`;a.textContent=label;a.style.cssText='display:grid;place-items:center;min-width:34px;min-height:34px;border:1px solid #ffffff4a;color:inherit;font-size:.68rem;font-weight:700;text-decoration:none';a.setAttribute('aria-label',code==='es'?'Traducir página al español':'Traduire la page en français');box.append(a)}b.insertAdjacentElement('afterend',box)})();</script>
+
 </body>
 </html>

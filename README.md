@@ -6,7 +6,7 @@
 
 ## 🌐 Página do projeto
 
-**[agonisingbasher.github.io/stardew-valley-wiiu](https://agonisingbasher.github.io/stardew-valley-wiiu/?lang=pt-BR)** — estado atual, capturas do Cemu, tabela de FPS e documentação da R2 (PT-BR / EN).
+**[agonisingbasher.github.io/stardew-valley-wiiu](https://agonisingbasher.github.io/stardew-valley-wiiu/?lang=pt-BR)** — estado atual, capturas do Cemu, tabela de FPS e documentação da R2 (PT-BR / EN / ES / FR).
 
 O preview no navegador (`preview/index.html`) permanece a **demo antiga da v0.1** e **não** representa a R2. A R2 roda como RPX no Cemu / Wii U.
 
@@ -75,6 +75,10 @@ native/       núcleo histórico inicial da v0.1
 ```
 
 O pacote completo da R2 (RPX + fonte + evidências) é entregue no ZIP da versão, separado deste site.
+
+## 🌍 Idioma
+
+Todas as páginas — apresentação, `preview/` e as cinco páginas de `docs/`, incluindo o formulário de feedback — trazem o seletor com os quatro botões `PT / EN / ES / FR`. Os textos em espanhol e francês vêm de dicionários escritos para o projeto; não há link nem chamada para o Google Translate. A decisão segue `?lang=` > escolha salva no navegador (chave única `stardew-wiiu-language`, compartilhada por raiz, `preview/` e `docs/`) > `navigator.languages` > pt-BR, e qualquer `pt-*` colapsa em `pt-BR`. Chave ausente em um idioma cai no texto português que já está no HTML, em vez de imprimir `undefined`. No preview, até o rótulo dinâmico da dupla tela (`Casilla 64, 15 · 80 × 65` / `Case 64, 15 · 80 × 65`) é montado pela função do próprio idioma.
 
 ## 📚 Aviso
 

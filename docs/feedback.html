@@ -15,7 +15,12 @@
     <nav class="nav" aria-label="Navegação principal" data-i18n-aria-label="navLabel">
       <a class="lang-link" href="../index.html" data-i18n="navHome">Início</a>
       <a href="https://github.com/agonisingbasher/stardew-valley-wiiu" target="_blank" rel="noopener noreferrer" data-i18n="navGithub">GitHub ↗</a>
-      <button class="language-toggle" type="button" aria-label="Mudar para inglês" data-i18n-aria-label="languageButtonLabel">EN</button>
+      <span class="language-switch" role="group">
+        <button class="language-toggle" type="button" data-lang-option="pt-BR" lang="pt" aria-label="Português">PT</button>
+        <button class="language-toggle" type="button" data-lang-option="en" lang="en" aria-label="English">EN</button>
+        <button class="language-toggle" type="button" data-lang-option="es" lang="es" aria-label="Español">ES</button>
+        <button class="language-toggle" type="button" data-lang-option="fr" lang="fr" aria-label="Français">FR</button>
+      </span>
     </nav>
   </header>
 
@@ -113,6 +118,8 @@
         backToSite: "Back to the site"
       }
     };
+window.pageTranslations.fr = {"navLabel":"Navigation principale","navHome":"Accueil","navGithub":"GitHub ↗","languageButtonLabel":"Passer à l'anglais","eyebrow":"Centre de feedback · V0.11 R2","title":"Feedback et <span>bugs</span>","intro":"Vous avez trouvé un problème dans le laboratoire ou vous voulez suggérer quelque chose ? Décrivez ce qui s'est passé et joignez des captures ou une courte vidéo. Les champs avec * sont obligatoires.","docsNavLabel":"Documents","docCoverage":"Couverture R2","docPerf":"Performance","docHistory":"Historique","docDelivery":"Livraison standard","docFeedback":"Feedback","categoryLabel":"Catégorie","nameLabel":"Nom *","emailLabel":"Contact (e-mail) *","titleLabel":"Titre *","descriptionLabel":"Description *","imagesLabel":"Images (jusqu'à 5)","imagesHint":"Jusqu'à 5 images. Les photos volumineuses sont réduites avant l'envoi.","videoLabel":"Vidéo (jusqu'à 1)","videoHint":"Une vidéo de 20 MB maximum.","submitLabel":"Envoyer le feedback","privacyNote":"L'envoi passe par un service de formulaires externe et est transmis par e-mail au développeur. N'envoyez pas de mots de passe, de sauvegardes privées ni de données personnelles sensibles.","footerDisclaimer":"Projet expérimental et non officiel. Stardew Valley et ses ressources appartiennent à leurs titulaires respectifs.","backToSite":"Retour au site","pageTitle":"Feedback et bugs — Stardew Valley Wii U","pageDescription":"Envoyez un feedback, des suggestions ou des rapports de bugs du laboratoire Stardew Valley pour Wii U."};
+window.pageTranslations.es = {"navLabel":"Navegación principal","navHome":"Inicio","navGithub":"GitHub ↗","languageButtonLabel":"Cambiar a inglés","eyebrow":"Centro de feedback · V0.11 R2","title":"Feedback y <span>bugs</span>","intro":"¿Encontraste un problema en el laboratorio o quieres sugerir algo? Describe lo que pasó y adjunta capturas o un video corto. Los campos con * son obligatorios.","docsNavLabel":"Documentos","docCoverage":"Cobertura R2","docPerf":"Rendimiento","docHistory":"Historial","docDelivery":"Entrega estándar","docFeedback":"Feedback","categoryLabel":"Categoría","nameLabel":"Nombre *","emailLabel":"Contacto (correo) *","titleLabel":"Título *","descriptionLabel":"Descripción *","imagesLabel":"Imágenes (hasta 5)","imagesHint":"Hasta 5 imágenes. Las fotos grandes se reducen antes del envío.","videoLabel":"Vídeo (hasta 1)","videoHint":"Un video de hasta 20 MB.","submitLabel":"Enviar feedback","privacyNote":"El envío usa un servicio externo de formularios y se reenvía por correo al desarrollador. No envíes contraseñas, partidas privadas ni datos personales sensibles.","footerDisclaimer":"Proyecto experimental y no oficial. Stardew Valley y sus recursos pertenecen a sus respectivos titulares.","backToSite":"Volver al sitio","pageTitle":"Feedback y bugs — Stardew Valley Wii U","pageDescription":"Envía feedback, sugerencias o reportes de bugs del laboratorio Stardew Valley para Wii U."};
   </script>
   <script src="doc-lang.js"></script>
   <script src="feedback.js?v=2026.10.26.3"></script>

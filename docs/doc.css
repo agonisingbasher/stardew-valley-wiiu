@@ -31,6 +31,8 @@ a:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
   background: var(--panel); color: var(--text); font: inherit; font-size: .85rem; font-weight: 700; cursor: pointer;
 }
 .language-toggle:hover { border-color: var(--green); color: var(--green); }
+.language-switch { display: inline-flex; flex-wrap: wrap; gap: 5px; }
+.language-toggle[aria-pressed="true"] { border-color: var(--green); background: var(--green); color: #16241a; }
 .hero { padding: 36px 0 28px; }
 .eyebrow { color: var(--gold); font-size: .78rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
 h1 { max-width: 900px; margin: 14px 0; font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1.05; letter-spacing: -.04em; }

@@ -1,22 +1,40 @@
 (function () {
+  const LANGUAGES = ["pt-BR", "en", "es", "fr"];
   const languageStorageKey = "stardew-wiiu-language";
-  const languageButton = document.querySelector(".language-toggle");
+  const languageButtons = document.querySelectorAll("[data-lang-option]");
   const metaDescription = document.querySelector('meta[name="description"]');
-  const requestedLanguage = new URLSearchParams(window.location.search).get("lang");
-  let currentLanguage = requestedLanguage === "en" || requestedLanguage === "pt-BR"
-    ? requestedLanguage
-    : "pt-BR";
 
-  if (requestedLanguage !== "en" && requestedLanguage !== "pt-BR") {
+  function normalizeLanguage(value) {
+    if (value === "pt") return "pt-BR";
+    return LANGUAGES.includes(value) ? value : null;
+  }
+
+  function readStoredLanguage() {
     try {
-      const storedLanguage = localStorage.getItem(languageStorageKey);
-      if (storedLanguage === "en" || storedLanguage === "pt-BR") {
-        currentLanguage = storedLanguage;
-      }
+      return normalizeLanguage(localStorage.getItem(languageStorageKey));
     } catch (error) {
       if (error.name !== "SecurityError") throw error;
+      return null;
     }
   }
+
+  /* Sem ?lang= na URL e sem escolha gravada, o navegador decide: quem abre de Buenos
+     Aires ve espanhol, quem abre de Paris ve frances. Um pt de qualquer pais continua
+     em pt-BR, que e a unica variante portuguesa que temos. */
+  function detectLanguage() {
+    const preferred = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language];
+    for (const tag of preferred) {
+      if (!tag) continue;
+      const base = String(tag).toLowerCase().split("-")[0];
+      if (base === "pt") return "pt-BR";
+      const match = LANGUAGES.find((code) => code.toLowerCase() === base);
+      if (match) return match;
+    }
+    return "pt-BR";
+  }
+
+  const requestedLanguage = normalizeLanguage(new URLSearchParams(window.location.search).get("lang"));
+  let currentLanguage = requestedLanguage || readStoredLanguage() || detectLanguage();
 
   const defaults = {
     title: document.title,
@@ -65,16 +83,16 @@
   }
 
   function setLanguage(language) {
-    currentLanguage = language;
+    currentLanguage = normalizeLanguage(language) || "pt-BR";
     try {
-      localStorage.setItem(languageStorageKey, language);
+      localStorage.setItem(languageStorageKey, currentLanguage);
     } catch (error) {
       if (error.name !== "SecurityError") throw error;
     }
 
-    const content = window.pageTranslations && window.pageTranslations[language];
+    const content = window.pageTranslations && window.pageTranslations[currentLanguage];
     restoreDefaults();
-    document.documentElement.lang = language === "en" ? "en" : "pt-BR";
+    document.documentElement.lang = currentLanguage === "pt-BR" ? "pt-BR" : currentLanguage;
 
     if (content) {
       if (content.pageTitle) document.title = content.pageTitle;
@@ -82,25 +100,26 @@
       applyTranslations(content);
     }
 
-    if (languageButton) languageButton.textContent = language === "en" ? "PT-BR" : "EN";
+    /* O rotulo dos quatro botoes e fixo (PT/EN/ES/FR): o que muda e o estado pressionado. */
+    languageButtons.forEach((button) => {
+      button.setAttribute("aria-pressed", String(normalizeLanguage(button.dataset.langOption) === currentLanguage));
+    });
 
     document.querySelectorAll(".lang-link").forEach((link) => {
       const url = new URL(link.href, window.location.href);
-      url.searchParams.set("lang", language);
+      url.searchParams.set("lang", currentLanguage);
       link.href = url.href;
     });
 
     const pageUrl = new URL(window.location.href);
-    pageUrl.searchParams.set("lang", language);
+    pageUrl.searchParams.set("lang", currentLanguage);
     history.replaceState(null, "", pageUrl);
 
-    document.dispatchEvent(new CustomEvent("languagechange", { detail: { language } }));
+    document.dispatchEvent(new CustomEvent("languagechange", { detail: { language: currentLanguage } }));
   }
 
-  if (languageButton) {
-    languageButton.addEventListener("click", () => {
-      setLanguage(currentLanguage === "pt-BR" ? "en" : "pt-BR");
-    });
-  }
+  languageButtons.forEach((button) => {
+    button.addEventListener("click", () => setLanguage(button.dataset.langOption));
+  });
   setLanguage(currentLanguage);
 })();

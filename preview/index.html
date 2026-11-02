@@ -77,6 +77,8 @@
     }
     .language-toggle { min-height: 44px; padding: 9px 15px; border: 1px solid var(--line); border-radius: 9px; background: var(--panel); color: var(--text); font: inherit; font-weight: 700; cursor: pointer; }
     .language-toggle:hover { border-color: var(--green); background: var(--panel-light); }
+    .language-switch { display: inline-flex; flex-wrap: wrap; gap: 5px; }
+    .language-toggle[aria-pressed="true"] { border-color: var(--green); background: var(--green); color: #16241a; }
   </style>
 </head>
 <body>
@@ -90,7 +92,12 @@
       <div class="header-links">
         <a class="back-link" href="../index.html" data-i18n="backLink">← Voltar à página principal</a>
         <a class="back-link" href="https://agonisingbasher.github.io/personal-website/" data-i18n="otherProjects">Outros projetos ↗</a>
-        <button class="language-toggle" type="button" aria-label="Switch to English">EN</button>
+        <span class="language-switch" role="group">
+          <button class="language-toggle" type="button" data-lang-option="pt-BR" lang="pt" aria-label="Português">PT</button>
+          <button class="language-toggle" type="button" data-lang-option="en" lang="en" aria-label="English">EN</button>
+          <button class="language-toggle" type="button" data-lang-option="es" lang="es" aria-label="Español">ES</button>
+          <button class="language-toggle" type="button" data-lang-option="fr" lang="fr" aria-label="Français">FR</button>
+        </span>
       </div>
     </header>
     <div id="preview-unavailable" class="note" role="status" hidden><strong data-i18n="unavailableTitle">Não foi possível carregar os recursos do preview.</strong> <span data-i18n="unavailableText">Verifique se o pacote foi clonado e extraído por completo; consulte o</span> <a href="../README.md" data-i18n="readme">README</a> <span data-i18n="unavailableEnd">para instruções.</span></div>
@@ -168,32 +175,126 @@
         scopeText: "mapa estático, câmera, avatar e colisão aproximada. Abigail é o avatar temporário de teste. Casa, construções e objetos dinâmicos ainda não foram montados; a fazenda aparece vazia. Agricultura, inventário, áudio, transições e salvamento ainda não estão implementados. Esta visualização não mede o desempenho no Wii U."
       }
     };
+
+    previewTranslations.es = {
+
+        badge: "Felipe Alexandre · laboratorio homebrew",
+        heading: "Primeros pasos en la granja",
+        subtitle: "v0.1 · demostración de exploración en el navegador",
+        backLink: "← Volver a la página principal",
+        otherProjects: "Otros proyectos ↗",
+        unavailableTitle: "No se pudieron cargar los recursos de la vista previa.",
+        unavailableText: "Verifica que el paquete se haya clonado y extraído por completo; consulta el",
+        readme: "README",
+        unavailableEnd: "para las instrucciones.",
+        tvLabel: "TV · escenario principal",
+        mapLabel: "Mapa original extraído",
+        tvCanvasLabel: "Granja explorable con las flechas o WASD",
+        gamepadLabel: "GamePad · simulación",
+        mapMode: "Mapa",
+        gamepadCanvasLabel: "Simulación de la pantalla del GamePad",
+        resetButton: "Reiniciar posición (R)",
+        modeButton: "Alternar mapa / juego (M)",
+        debugButton: "Mostrar colisiones (C)",
+        arrows: "Flechas",
+        move: "mover",
+        run: "correr",
+        restart: "reiniciar",
+        gamepadControls: "control estándar: análogo izquierdo / direccional, A para correr, Y para alternar pantalla",
+        scopeTitle: "Alcance de esta versión:",
+        scopeText: "mapa estático, cámara, avatar y colisión aproximada. Abigail es el avatar temporal de pruebas. La casa, las construcciones y los objetos dinámicos todavía no se han montado; la granja aparece vacía. La agricultura, el inventario, el audio, las transiciones y el guardado todavía no están implementados. Esta visualización no mide el rendimiento en Wii U.",
+        title: "Stardew Wii U · laboratorio v0.1",
+        gameMode: "Juego",
+        loading: "Cargando recursos…",
+        loadError: "No se pudieron cargar las imágenes. Vuelve a abrir el paquete completo.",
+        status: (x, y, width, height) => `Casilla ${x}, ${y} · ${width} × ${height} · audio pendiente · avatar temporal`,
+    };
+    previewTranslations.fr = {
+
+        badge: "Felipe Alexandre · laboratoire homebrew",
+        heading: "Premiers pas sur la ferme",
+        subtitle: "v0.1 · démonstration d'exploration dans le navigateur",
+        backLink: "← Retour à la page principale",
+        otherProjects: "Autres projets ↗",
+        unavailableTitle: "Impossible de charger les ressources de l'aperçu.",
+        unavailableText: "Vérifiez que le paquet a bien été cloné et extrait intégralement ; consultez le",
+        readme: "README",
+        unavailableEnd: "pour les instructions.",
+        tvLabel: "TV · scène principale",
+        mapLabel: "Carte originale extraite",
+        tvCanvasLabel: "Ferme explorable avec les flèches ou WASD",
+        gamepadLabel: "GamePad · simulation",
+        mapMode: "Carte",
+        gamepadCanvasLabel: "Simulation de l'écran du GamePad",
+        resetButton: "Réinitialiser la position (R)",
+        modeButton: "Basculer carte / jeu (M)",
+        debugButton: "Afficher les collisions (C)",
+        arrows: "Flèches",
+        move: "se déplacer",
+        run: "courir",
+        restart: "réinitialiser",
+        gamepadControls: "manette par défaut : stick analogique gauche / croix directionnelle, A pour courir, Y pour changer d'écran",
+        scopeTitle: "Périmètre de cette version :",
+        scopeText: "carte statique, caméra, avatar et collision approximative. Abigail est l'avatar temporaire des tests. La maison, les constructions et les objets dynamiques ne sont pas encore assemblés ; la ferme apparaît vide. L'agriculture, l'inventaire, l'audio, les transitions et la sauvegarde ne sont pas encore implémentés. Cette visualisation ne mesure pas les performances sur Wii U.",
+        title: "Stardew Wii U · laboratoire v0.1",
+        gameMode: "Jeu",
+        loading: "Chargement des ressources…",
+        loadError: "Échec du chargement des images. Rouvrez le package complet.",
+        status: (x, y, width, height) => `Case ${x}, ${y} · ${width} × ${height} · audio en attente · avatar temporaire`,
+    };
+    const LANGUAGES = ["pt-BR", "en", "es", "fr"];
     const languageStorageKey = "stardew-wiiu-language";
-    const requestedLanguage = new URLSearchParams(window.location.search).get("lang");
-    let previewLanguage = requestedLanguage === "en" || requestedLanguage === "pt-BR"
-      ? requestedLanguage
-      : "pt-BR";
-    if (requestedLanguage !== "en" && requestedLanguage !== "pt-BR") {
+    const languageButtons = document.querySelectorAll(".language-toggle");
+    const originalText = new Map();
+    document.querySelectorAll("[data-i18n]").forEach((element) => originalText.set(element, element.textContent));
+    const originalAria = new Map();
+    document.querySelectorAll("[data-i18n-aria-label]").forEach((element) => originalAria.set(element, element.getAttribute("aria-label")));
+
+    function normalizeLanguage(value) {
+      if (value === "pt") return "pt-BR";
+      return LANGUAGES.includes(value) ? value : null;
+    }
+
+    function readStoredLanguage() {
       try {
-        const storedLanguage = localStorage.getItem(languageStorageKey);
-        if (storedLanguage === "en" || storedLanguage === "pt-BR") {
-          previewLanguage = storedLanguage;
-        }
+        return normalizeLanguage(localStorage.getItem(languageStorageKey));
       } catch (error) {
         if (error.name !== "SecurityError") throw error;
+        return null;
       }
     }
-    window.PREVIEW_TEXT = previewTranslations[previewLanguage];
+
+    function detectLanguage() {
+      const preferred = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language];
+      for (const tag of preferred) {
+        if (!tag) continue;
+        const base = String(tag).toLowerCase().split("-")[0];
+        if (base === "pt") return "pt-BR";
+        const match = LANGUAGES.find((code) => code.toLowerCase() === base);
+        if (match) return match;
+      }
+      return "pt-BR";
+    }
+
+    const requestedLanguage = normalizeLanguage(new URLSearchParams(window.location.search).get("lang"));
+    let previewLanguage = requestedLanguage || readStoredLanguage() || detectLanguage();
+    window.PREVIEW_TEXT = previewTranslations[previewLanguage] || previewTranslations["pt-BR"];
     window.setPreviewLanguage = (language) => {
-      previewLanguage = language;
-      window.PREVIEW_TEXT = previewTranslations[language];
-      document.documentElement.lang = language;
+      previewLanguage = normalizeLanguage(language) || "pt-BR";
+      const content = previewTranslations[previewLanguage];
+      const fallback = previewTranslations["pt-BR"];
+      /* O PT esta no proprio HTML: chave ausente em es/fr mantem o texto anterior em
+         vez de escrever undefined na pagina. */
+      const pick = (key) => (content[key] !== undefined ? content[key] : fallback[key]);
+      window.PREVIEW_TEXT = { ...fallback, ...content };
+      document.documentElement.lang = previewLanguage;
       document.title = window.PREVIEW_TEXT.title;
       document.querySelectorAll("[data-i18n]").forEach((element) => {
-        element.textContent = window.PREVIEW_TEXT[element.dataset.i18n];
+        element.textContent = pick(element.dataset.i18n) ?? originalText.get(element);
       });
       document.querySelectorAll("[data-i18n-aria-label]").forEach((element) => {
-        element.setAttribute("aria-label", window.PREVIEW_TEXT[element.dataset.i18nAriaLabel]);
+        const value = pick(element.dataset.i18nAriaLabel) ?? originalAria.get(element);
+        if (value) element.setAttribute("aria-label", value);
       });
       const modeLabel = document.getElementById("modeLabel");
       modeLabel.textContent = window.PREVIEW_TEXT[
@@ -205,26 +306,24 @@
       } else if (!window.PROTOTYPE) {
         status.textContent = window.PREVIEW_TEXT.loading;
       }
-      const languageButton = document.querySelector(".language-toggle");
-      languageButton.textContent = language === "en" ? "PT-BR" : "EN";
-      languageButton.setAttribute("aria-label", language === "en"
-        ? previewTranslations.en.languageButtonLabel
-        : previewTranslations["pt-BR"].languageButtonLabel);
+      languageButtons.forEach((button) => {
+        button.setAttribute("aria-pressed", String(normalizeLanguage(button.dataset.langOption) === previewLanguage));
+      });
       const backLink = document.querySelector(".back-link");
-      const backUrl = new URL(backLink.href);
-      backUrl.searchParams.set("lang", language);
-      backLink.href = backUrl;
+      const backUrl = new URL(backLink.href, window.location.href);
+      backUrl.searchParams.set("lang", previewLanguage);
+      backLink.href = backUrl.href;
       const pageUrl = new URL(window.location.href);
-      pageUrl.searchParams.set("lang", language);
+      pageUrl.searchParams.set("lang", previewLanguage);
       history.replaceState(null, "", pageUrl);
       try {
-        localStorage.setItem(languageStorageKey, language);
+        localStorage.setItem(languageStorageKey, previewLanguage);
       } catch (error) {
         if (error.name !== "SecurityError") throw error;
       }
     };
-    document.querySelector(".language-toggle").addEventListener("click", () => {
-      window.setPreviewLanguage(previewLanguage === "en" ? "pt-BR" : "en");
+    languageButtons.forEach((button) => {
+      button.addEventListener("click", () => window.setPreviewLanguage(button.dataset.langOption));
     });
     window.setPreviewLanguage(previewLanguage);
 
