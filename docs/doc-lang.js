@@ -1,4 +1,10 @@
 (function () {
+  const navigationTranslations = {
+    "pt-BR": { skipContent: "Pular para o conteúdo", languageLabel: "Idioma" },
+    en: { skipContent: "Skip to content", languageLabel: "Language" },
+    es: { skipContent: "Saltar al contenido", languageLabel: "Idioma" },
+    fr: { skipContent: "Aller au contenu", languageLabel: "Langue" }
+  };
   const LANGUAGES = ["pt-BR", "en", "es", "fr"];
   const languageStorageKey = "stardew-wiiu-language";
   const languageButtons = document.querySelectorAll("[data-lang-option]");
@@ -99,6 +105,8 @@
       if (metaDescription && content.pageDescription) metaDescription.content = content.pageDescription;
       applyTranslations(content);
     }
+
+    applyTranslations(navigationTranslations[currentLanguage]);
 
     /* O rotulo dos quatro botoes e fixo (PT/EN/ES/FR): o que muda e o estado pressionado. */
     languageButtons.forEach((button) => {
