@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#17231e">
-  <meta name="description" content="Medições de desempenho da V0.11 R2 no Cemu 2.6: seis cenários, janelas de 60 quadros e limites da validação.">
-  <title>Desempenho V0.11 R2 — Stardew Valley Wii U</title>
+  <meta name="description" content="Medições históricas de desempenho da V0.11 R2 no Cemu 2.6: seis cenários, janelas de 60 quadros e limites da validação. FPS e RAM sem medição desde essa revisão.">
+  <title>Desempenho V0.11 R2 (histórico) — Stardew Valley Wii U</title>
   <link rel="stylesheet" href="doc.css">
 </head>
 <body>
@@ -27,12 +27,13 @@
   <main id="main-content" tabindex="-1">
     <div class="wrap">
       <section class="hero">
-        <div class="eyebrow" data-i18n="eyebrow">Documentação · V0.11 R2</div>
-        <h1 data-i18n-html="title">Desempenho da <span>V0.11 R2</span></h1>
-        <p class="intro" data-i18n="intro">Cemu 2.6, Linux/Vulkan, Mesa llvmpipe, host compartilhado. TV 1920×1080. Movimento programado, seis cenários. Médias em janelas de 60 quadros, excluindo a primeira janela de cada visita para aquecimento. Não é medição do Wii U físico.</p>
+        <div class="eyebrow" data-i18n="eyebrow">Documentação · V0.11 R2 (medição histórica)</div>
+        <h1 data-i18n-html="title">Desempenho da <span>V0.11 R2</span> (histórico)</span></h1>
+        <p class="intro" data-i18n="intro">Medição histórica da V0.11 R2 no Cemu 2.6: Linux/Vulkan, Mesa llvmpipe, host compartilhado, TV 1920×1080, movimento roteirizado em seis cenários, médias em janelas de 60 quadros sem a primeira janela de aquecimento. Desde essa revisão FPS e RAM não foram medidos de novo — o progresso atual registra as duas grandezas como nao-medido.</p>
       </section>
 
       <nav class="doc-nav" aria-label="Documentos" data-i18n-aria-label="docsNavLabel">
+        <a class="lang-link" href="COBERTURA_V014R9.html" data-i18n="docCoverageCurrent">Cobertura V0.14 R9</a>
         <a class="lang-link" href="COBERTURA_V011R2.html" data-i18n="docCoverage">Cobertura R2</a>
         <a class="lang-link" href="DESEMPENHO_V011R2.html" aria-current="page" data-i18n="docPerf">Desempenho</a>
         <a class="lang-link" href="HISTORICO_VERSOES.html" data-i18n="docHistory">Histórico</a>
@@ -42,8 +43,8 @@
 
       <div class="prose">
         <section>
-          <div class="section-label" data-i18n="perfLabel">Medições</div>
-          <h2 data-i18n="perfTitle">Medição de desempenho</h2>
+          <div class="section-label" data-i18n="perfLabel">Medições históricas</div>
+          <h2 data-i18n="perfTitle">Medição de desempenho da V0.11 R2</h2>
           <div class="table-scroll">
             <table class="perf-table">
               <thead>
@@ -67,7 +68,7 @@
           </div>
           <div class="callout">
             <strong data-i18n="calloutImportant">Importante:</strong>
-            <span data-i18n="perfCallout">o teste mostrou médias acima de 40 FPS e várias próximas de 60. Existem picos: portanto, mínimo contínuo de 40 FPS ainda NÃO foi atingido/garantido. O pior pico observado fora das janelas de aquecimento foi 127,879 ms na fazenda. Ambiente compartilhado e renderização Vulkan por software também afetam a comparação.</span>
+            <span data-i18n="perfCallout">o teste da V0.11 R2 mostrou médias acima de 40 FPS e várias próximas de 60. Há picos: por isso um mínimo contínuo de 40 FPS ainda NÃO foi atingido/garantido. Estes números descrevem a V0.11 R2, não a revisão atual, e nenhuma medição foi feita em Wii U físico.</span>
           </div>
         </section>
 
@@ -90,23 +91,24 @@
   <script>
     window.pageTranslations = {
       en: {
-        pageTitle: "V0.11 R2 Performance — Stardew Valley Wii U",
-        pageDescription: "V0.11 R2 performance measurements on Cemu 2.6: six scenarios, 60-frame windows, and validation limits.",
+        pageTitle: "V0.11 R2 Performance (historical) — Stardew Valley Wii U",
+        pageDescription: "Historical V0.11 R2 performance measurements on Cemu 2.6: six scenarios, 60-frame windows, and validation limits. FPS and RAM have not been measured since.",
         navLabel: "Main navigation",
         navHome: "Home",
         navGithub: "GitHub ↗",
         languageButtonLabel: "Switch to Brazilian Portuguese",
-        eyebrow: "Documentation · V0.11 R2",
-        title: "V0.11 R2 <span>performance</span>",
-        intro: "Cemu 2.6, Linux/Vulkan, Mesa llvmpipe, shared host. 1920×1080 TV. Scripted movement, six scenarios. Averages over 60-frame windows, excluding the first window of each visit for warm-up. Not a physical Wii U measurement.",
+        eyebrow: "Documentation · V0.11 R2 (historical measurement)",
+        title: "V0.11 R2 <span>performance</span> (historical)",
+        intro: "Historical V0.11 R2 measurement on Cemu 2.6: Linux/Vulkan, Mesa llvmpipe, shared host, 1920×1080 TV, scripted movement across six scenarios, averages over 60-frame windows excluding the first warm-up window. Since that revision FPS and RAM have not been measured again — the current progress file records both as nao-medido.",
         docsNavLabel: "Documents",
-        docCoverage: "R2 coverage",
-        docPerf: "Performance",
+        docCoverage: "R2 coverage (historical)",
+        docCoverageCurrent: "V0.14 R9 coverage",
+        docPerf: "Performance (historical)",
         docHistory: "History",
         docDelivery: "Delivery standard",
         docFeedback: "Feedback",
-        perfLabel: "Measurements",
-        perfTitle: "Performance measurement",
+        perfLabel: "Historical measurements",
+        perfTitle: "V0.11 R2 performance measurement",
         perfScenario: "Scenario",
         perfAvg: "Avg FPS",
         perfLow: "Lowest window average",
@@ -119,7 +121,7 @@
         perfTownRiver: "Town / river",
         perfPierre: "Pierre interior",
         calloutImportant: "Important:",
-        perfCallout: "the test showed averages above 40 FPS and several near 60. Spikes exist: therefore, a continuous 40 FPS minimum has still NOT been reached/guaranteed. The worst spike observed outside warm-up windows was 127.879 ms on the farm. The shared environment and software Vulkan rendering also affect the comparison.",
+        perfCallout: "the V0.11 R2 test showed averages above 40 FPS and several near 60. Spikes exist: therefore a continuous 40 FPS minimum has still NOT been reached/guaranteed. These numbers describe V0.11 R2, not the current revision, and no measurement was taken on physical Wii U.",
         logsLabel: "Logs",
         logsTitle: "How to read the results",
         logsText: "Raw logs include warm-up and scenario changes. The distribution executable log confirms operation without scripted movement. The compat version was initialized separately.",
@@ -127,9 +129,9 @@
         backToSite: "Back to the site"
       }
     };
-window.pageTranslations.fr = {"navLabel":"Navigation principale","navHome":"Accueil","navGithub":"GitHub ↗","languageButtonLabel":"Passer à l'anglais","eyebrow":"Documentation · V0.11 R2","title":"Performance de la <span>V0.11 R2</span>","intro":"Cemu 2.6, Linux/Vulkan, Mesa llvmpipe, hôte partagé. TV 1920×1080. Déplacement scripté, six scénarios. Moyennes sur des fenêtres de 60 images, en excluant la première fenêtre de chaque visite pour l'échauffement. Ce n'est pas une mesure sur Wii U physique.","docsNavLabel":"Documents","docCoverage":"Couverture R2","docPerf":"Performance","docHistory":"Historique","docDelivery":"Livraison standard","docFeedback":"Feedback","perfLabel":"Mesures","perfTitle":"Mesure de performance","perfScenario":"Scénario","perfAvg":"FPS moyen","perfLow":"Moyenne de fenêtre la plus basse","perfWorst":"Pire image (ms)","perfOver":"Images au-dessus de 25 ms","perfFarmMove":"Ferme en mouvement","perfFarmRain":"Ferme sous la pluie","perfFarmNight":"Ferme la nuit","perfTownLewis":"Village / camion de Lewis","perfTownRiver":"Village / rivière","perfPierre":"Intérieur de Pierre","calloutImportant":"Important :","perfCallout":"le test a montré des moyennes au-dessus de 40 FPS et plusieurs proches de 60. Il existe des pics : un minimum continu de 40 FPS n'est donc PAS encore atteint/garanti. Le pire pic observé hors des fenêtres d'échauffement était de 127,879 ms à la ferme. L'environnement partagé et le rendu Vulkan par logiciel affectent aussi la comparaison.","logsLabel":"Logs","logsTitle":"Comment lire les résultats","logsText":"Les journaux bruts incluent même l'échauffement et le changement de scénario. Le journal de l'exécutable de distribution confirme le fonctionnement sans déplacement scripté. La version compatible a été initialisée séparément.","footerDisclaimer":"Projet expérimental et non officiel. Stardew Valley et ses ressources appartiennent à leurs titulaires respectifs.","backToSite":"Retour au site","pageTitle":"Performance V0.11 R2 — Stardew Valley Wii U","pageDescription":"Mesures de performance de la V0.11 R2 sous Cemu 2.6 : six scénarios, fenêtres de 60 images et limites de la validation."};
-window.pageTranslations.es = {"navLabel":"Navegación principal","navHome":"Inicio","navGithub":"GitHub ↗","languageButtonLabel":"Cambiar a inglés","eyebrow":"Documentación · V0.11 R2","title":"Rendimiento de la <span>V0.11 R2</span>","intro":"Cemu 2.6, Linux/Vulkan, Mesa llvmpipe, host compartido. TV 1920×1080. Movimiento programado, seis escenarios. Promedios en ventanas de 60 fotogramas, excluyendo la primera ventana de cada visita para calentamiento. No es una medición del Wii U físico.","docsNavLabel":"Documentos","docCoverage":"Cobertura R2","docPerf":"Rendimiento","docHistory":"Historial","docDelivery":"Entrega estándar","docFeedback":"Feedback","perfLabel":"Mediciones","perfTitle":"Medición de rendimiento","perfScenario":"Escenario","perfAvg":"FPS medio","perfLow":"Menor promedio de ventana","perfWorst":"Peor fotograma (ms)","perfOver":"Fotogramas por encima de 25 ms","perfFarmMove":"Granja en movimiento","perfFarmRain":"Granja con lluvia","perfFarmNight":"Granja de noche","perfTownLewis":"Pueblo / camión de Lewis","perfTownRiver":"Pueblo / río","perfPierre":"Interior de Pierre","calloutImportant":"Importante:","perfCallout":"la prueba mostró promedios por encima de 40 FPS y varios cerca de 60. Hay picos: por lo tanto, el mínimo continuo de 40 FPS todavía NO se ha alcanzado/garantizado. El peor pico observado fuera de las ventanas de calentamiento fue 127,879 ms en la granja. El entorno compartido y el render Vulkan por software también afectan la comparación.","logsLabel":"Logs","logsTitle":"Cómo leer los resultados","logsText":"Los registros brutos incluyen incluso el calentamiento y el cambio de escenario. El registro del ejecutable de distribución confirma el funcionamiento sin movimiento programado. La versión compatible se inicializó por separado.","footerDisclaimer":"Proyecto experimental y no oficial. Stardew Valley y sus recursos pertenecen a sus respectivos titulares.","backToSite":"Volver al sitio","pageTitle":"Rendimiento V0.11 R2 — Stardew Valley Wii U","pageDescription":"Mediciones de rendimiento de la V0.11 R2 en Cemu 2.6: seis escenarios, ventanas de 60 fotogramas y límites de la validación."};
+window.pageTranslations.fr = {"pageTitle":"Performance de la V0.11 R2 (historique) — Stardew Valley Wii U","pageDescription":"Mesures de performance historiques de la V0.11 R2 sur Cemu 2.6 : six scénarios, fenêtres de 60 images et limites de la validation. Depuis, les FPS et la RAM n'ont plus été mesurés.","navLabel":"Navigation principale","navHome":"Accueil","navGithub":"GitHub ↗","languageButtonLabel":"Passer à l'anglais","eyebrow":"Documentation · V0.11 R2 (mesure historique)","title":"Performance de la <span>V0.11 R2</span> (historique)","intro":"Mesure historique de la V0.11 R2 sur Cemu 2.6 : Linux/Vulkan, Mesa llvmpipe, hôte partagé, télé 1920×1080, mouvement scripté sur six scénarios, moyennes sur des fenêtres de 60 images hors première fenêtre de chauffe. Depuis cette révision, les FPS et la RAM n'ont plus été mesurés — la progression actuelle consigne les deux grandeurs comme nao-medido.","docsNavLabel":"Documents","docCoverage":"Couverture R2 (historique)","docCoverageCurrent":"Couverture V0.14 R9","docPerf":"Performance (historique)","docHistory":"Historique","docDelivery":"Livraison standard","docFeedback":"Feedback","perfLabel":"Mesures historiques","perfTitle":"Mesure de performance de la V0.11 R2","perfScenario":"Scénario","perfAvg":"FPS moyen","perfLow":"Moyenne de fenêtre la plus basse","perfWorst":"Pire image (ms)","perfOver":"Images au-dessus de 25 ms","perfFarmMove":"Ferme en mouvement","perfFarmRain":"Ferme sous la pluie","perfFarmNight":"Ferme la nuit","perfTownLewis":"Village / camion de Lewis","perfTownRiver":"Village / rivière","perfPierre":"Intérieur de Pierre","calloutImportant":"Important :","perfCallout":"le test de la V0.11 R2 a montré des moyennes supérieures à 40 FPS et plusieurs proches de 60. Il y a des pics : un minimum continu de 40 FPS n'a donc toujours PAS été atteint/garanti. Ces chiffres décrivent la V0.11 R2, pas la révision actuelle, et aucune mesure n'a été faite sur Wii U physique.","logsLabel":"Logs","logsTitle":"Comment lire les résultats","logsText":"Les journaux bruts incluent même l'échauffement et le changement de scénario. Le journal de l'exécutable de distribution confirme le fonctionnement sans déplacement scripté. La version compatible a été initialisée séparément.","footerDisclaimer":"Projet expérimental et non officiel. Stardew Valley et ses ressources appartiennent à leurs titulaires respectifs.","backToSite":"Retour au site"};
+window.pageTranslations.es = {"pageTitle":"Rendimiento de la V0.11 R2 (histórico) — Stardew Valley Wii U","pageDescription":"Mediciones de rendimiento históricas de la V0.11 R2 en Cemu 2.6: seis escenarios, ventanas de 60 fotogramas y límites de la validación. Desde entonces los FPS y la RAM no se han medido.","navLabel":"Navegación principal","navHome":"Inicio","navGithub":"GitHub ↗","languageButtonLabel":"Cambiar a inglés","eyebrow":"Documentación · V0.11 R2 (medición histórica)","title":"Rendimiento de la <span>V0.11 R2</span> (histórico)","intro":"Medición histórica de la V0.11 R2 en Cemu 2.6: Linux/Vulkan, Mesa llvmpipe, host compartido, TV 1920×1080, movimiento guionizado en seis escenarios, medias en ventanas de 60 fotogramas sin la primera ventana de calentamiento. Desde esa revisión los FPS y la RAM no se han vuelto a medir — el progreso actual registra ambas magnitudes como nao-medido.","docsNavLabel":"Documentos","docCoverage":"Cobertura R2 (histórica)","docCoverageCurrent":"Cobertura V0.14 R9","docPerf":"Rendimiento (histórico)","docHistory":"Historial","docDelivery":"Entrega estándar","docFeedback":"Feedback","perfLabel":"Mediciones históricas","perfTitle":"Medición de rendimiento de la V0.11 R2","perfScenario":"Escenario","perfAvg":"FPS medio","perfLow":"Menor promedio de ventana","perfWorst":"Peor fotograma (ms)","perfOver":"Fotogramas por encima de 25 ms","perfFarmMove":"Granja en movimiento","perfFarmRain":"Granja con lluvia","perfFarmNight":"Granja de noche","perfTownLewis":"Pueblo / camión de Lewis","perfTownRiver":"Pueblo / río","perfPierre":"Interior de Pierre","calloutImportant":"Importante:","perfCallout":"el test de la V0.11 R2 mostró medias por encima de 40 FPS y varias cercanas a 60. Hay picos: por eso un mínimo continuo de 40 FPS todavía NO se alcanzó/garantizó. Estas cifras describen la V0.11 R2, no la revisión actual, y ninguna medición se hizo en el Wii U físico.","logsLabel":"Logs","logsTitle":"Cómo leer los resultados","logsText":"Los registros brutos incluyen incluso el calentamiento y el cambio de escenario. El registro del ejecutable de distribución confirma el funcionamiento sin movimiento programado. La versión compatible se inicializó por separado.","footerDisclaimer":"Proyecto experimental y no oficial. Stardew Valley y sus recursos pertenecen a sus respectivos titulares.","backToSite":"Volver al sitio"};
   </script>
-  <script src="doc-lang.js"></script>
+  <script src="../idioma-pagina.js"></script>
 </body>
 </html>

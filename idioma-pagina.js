@@ -47,7 +47,8 @@
     description: metaDescription ? metaDescription.content : "",
     text: new Map(),
     html: new Map(),
-    aria: new Map()
+    aria: new Map(),
+    alt: new Map()
   };
   document.querySelectorAll("[data-i18n]").forEach((element) => {
     defaults.text.set(element, element.textContent);
@@ -57,6 +58,9 @@
   });
   document.querySelectorAll("[data-i18n-aria-label]").forEach((element) => {
     defaults.aria.set(element, element.getAttribute("aria-label"));
+  });
+  document.querySelectorAll("[data-i18n-alt]").forEach((element) => {
+    defaults.alt.set(element, element.getAttribute("alt"));
   });
 
   function restoreDefaults() {
@@ -70,6 +74,9 @@
     });
     defaults.aria.forEach((value, element) => {
       element.setAttribute("aria-label", value);
+    });
+    defaults.alt.forEach((value, element) => {
+      element.setAttribute("alt", value);
     });
   }
 
@@ -85,6 +92,10 @@
     document.querySelectorAll("[data-i18n-aria-label]").forEach((element) => {
       const value = content[element.dataset.i18nAriaLabel];
       if (value !== undefined) element.setAttribute("aria-label", value);
+    });
+    document.querySelectorAll("[data-i18n-alt]").forEach((element) => {
+      const value = content[element.dataset.i18nAlt];
+      if (value !== undefined) element.alt = value;
     });
   }
 

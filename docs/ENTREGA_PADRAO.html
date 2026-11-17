@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#17231e">
-  <meta name="description" content="Padrão de entrega do laboratório Stardew Valley para Wii U: um único ZIP com executáveis, fonte, instruções, histórico, testes e hashes.">
+  <meta name="description" content="Padrão de entrega do laboratório Stardew Valley para Wii U: pasta Stardew_WiiU_&lt;versão&gt; com executáveis, fonte, evidências, instruções, histórico, testes e hashes; ZIP só sob pedido explícito.">
   <title>Entrega padrão — Stardew Valley Wii U</title>
   <link rel="stylesheet" href="doc.css">
 </head>
@@ -27,12 +27,13 @@
   <main id="main-content" tabindex="-1">
     <div class="wrap">
       <section class="hero">
-        <div class="eyebrow" data-i18n="eyebrow">Documentação · V0.11 R2</div>
+        <div class="eyebrow" data-i18n="eyebrow">Documentação · padrão de entrega</div>
         <h1 data-i18n-html="title">Entrega <span>padrão</span></h1>
-        <p class="intro" data-i18n-html="intro">Cada versão deve ser entregue em <strong>um único arquivo ZIP contendo os executáveis compilados e o código-fonte correspondente</strong>.</p>
+        <p class="intro" data-i18n-html="intro">Cada versão é entregue em uma pasta <code>Stardew_WiiU_&lt;versão&gt;</code> que reúne <code>executavel/</code>, <code>fonte/</code>, <code>evidencias/</code>, instruções, histórico, resultados de teste e hashes. A entrega padrão é por pasta; um ZIP só é feito sob pedido explícito.</strong>.</p>
       </section>
 
       <nav class="doc-nav" aria-label="Documentos" data-i18n-aria-label="docsNavLabel">
+        <a class="lang-link" href="COBERTURA_V014R9.html" data-i18n="docCoverageCurrent">Cobertura V0.14 R9</a>
         <a class="lang-link" href="COBERTURA_V011R2.html" data-i18n="docCoverage">Cobertura R2</a>
         <a class="lang-link" href="DESEMPENHO_V011R2.html" data-i18n="docPerf">Desempenho</a>
         <a class="lang-link" href="HISTORICO_VERSOES.html" data-i18n="docHistory">Histórico</a>
@@ -43,25 +44,25 @@
       <div class="prose">
         <section>
           <div class="section-label" data-i18n="deliveryLabel">O pacote</div>
-          <h2 data-i18n="deliveryTitle">Um ZIP por versão</h2>
-          <p data-i18n-html="deliveryText">As pastas <code>executavel/</code> e <code>fonte/</code> ficam no mesmo pacote, acompanhadas de instruções, histórico da versão, testes e hashes. Só separar os pacotes se o usuário pedir explicitamente.</p>
+          <h2 data-i18n="deliveryTitle">Uma pasta por versão</h2>
+          <p data-i18n-html="deliveryText">A versão ativa fica na raiz do projeto como <code>Stardew_WiiU_&lt;versão&gt;</code>. Prepare e valide a versão nova em pasta separada, confira os arquivos pelo manifesto, mova a pasta ativa anterior inteira para <code>Versões/</code> e coloque a nova na raiz. Versões arquivadas não são reescritas, e uma colisão de destino é resolvida antes de mover.</code> e <code>fonte/</code> ficam no mesmo pacote, acompanhadas de instruções, histórico da versão, testes e hashes. Só separar os pacotes se o usuário pedir explicitamente.</p>
 
           <article class="version-card">
-            <div class="meta" data-i18n="packageMeta">CONTEÚDO DO PACOTE</div>
-            <h3 data-i18n="packageTitle">O que vai no ZIP</h3>
+            <div class="meta" data-i18n="packageMeta">CONTEÚDO DA ENTREGA</div>
+            <h3 data-i18n="packageTitle">O que vai na pasta</h3>
             <ul>
-              <li data-i18n-html="packageExecutable"><code>executavel/</code> — executáveis compilados da versão.</li>
+              <li data-i18n-html="packageExecutable"><code>executavel/</code> — os executáveis compilados da versão, com a variante de compatibilidade.</code> — executáveis compilados da versão.</li>
               <li data-i18n-html="packageSource"><code>fonte/</code> — código-fonte correspondente.</li>
-              <li data-i18n="packageInstructions">Instruções de uso e reprodução.</li>
-              <li data-i18n="packageHistory">Histórico da versão.</li>
-              <li data-i18n="packageTests">Testes e evidências.</li>
-              <li data-i18n="packageHashes">Hashes para conferência.</li>
+              <li data-i18n="packageInstructions">Instruções de uso e reprodução a partir do fonte.</li>
+              <li data-i18n="packageHistory">Histórico de versões, com a nota de cada revisão.</li>
+              <li data-i18n="packageTests">Testes e evidências: logs, capturas e o build-info da revisão.</li>
+              <li data-i18n="packageHashes">Hashes por arquivo, para conferir o pacote pelo manifesto.</li>
             </ul>
           </article>
 
           <div class="callout">
             <strong data-i18n="calloutImportant">Importante:</strong>
-            <span data-i18n="calloutText">fonte e executáveis andam juntos. A separação em pacotes distintos só acontece mediante pedido explícito.</span>
+            <span data-i18n="calloutText">fonte e executáveis viajam juntos, na mesma pasta de versão. O ZIP fica reservado a um pedido explícito.</span>
           </div>
         </section>
       </div>
@@ -79,40 +80,41 @@
     window.pageTranslations = {
       en: {
         pageTitle: "Delivery standard — Stardew Valley Wii U",
-        pageDescription: "Delivery standard for the Stardew Valley Wii U lab: one ZIP with executables, source, instructions, history, tests, and hashes.",
+        pageDescription: "Delivery standard for the Stardew Valley Wii U lab: one Stardew_WiiU_<version> folder with executables, source, evidence, instructions, history, tests, and hashes; a ZIP only on explicit request.",
         navLabel: "Main navigation",
         navHome: "Home",
         navGithub: "GitHub ↗",
         languageButtonLabel: "Switch to Brazilian Portuguese",
-        eyebrow: "Documentation · V0.11 R2",
+        eyebrow: "Documentation · delivery standard",
         title: "Delivery <span>standard</span>",
-        intro: "Each version must be delivered as <strong>a single ZIP file containing the compiled executables and the corresponding source code</strong>.",
+        intro: "Each version is delivered in a <code>Stardew_WiiU_&lt;version&gt;</code> folder that gathers <code>executavel/</code>, <code>fonte/</code>, <code>evidencias/</code>, the instructions, the version history, the test results, and the hashes. Delivery is by folder; a ZIP happens only on explicit request.",
         docsNavLabel: "Documents",
-        docCoverage: "R2 coverage",
-        docPerf: "Performance",
+        docCoverage: "R2 coverage (historical)",
+        docCoverageCurrent: "V0.14 R9 coverage",
+        docPerf: "Performance (historical)",
         docHistory: "History",
         docDelivery: "Delivery standard",
         docFeedback: "Feedback",
         deliveryLabel: "The package",
-        deliveryTitle: "One ZIP per version",
-        deliveryText: "The <code>executavel/</code> and <code>fonte/</code> folders stay in the same package, accompanied by instructions, version history, tests, and hashes. Split the packages only if the user explicitly requests it.",
-        packageMeta: "PACKAGE CONTENTS",
-        packageTitle: "What goes in the ZIP",
-        packageExecutable: "<code>executavel/</code> — compiled executables for the version.",
+        deliveryTitle: "One folder per version",
+        deliveryText: "The active version sits at the project root as <code>Stardew_WiiU_&lt;version&gt;</code>. Prepare and validate the new version in a separate folder, check the files against the manifest, move the entire previous active folder to <code>Versões/</code>, and put the new folder at the root. Archived versions are never rewritten, and a destination collision is resolved before moving.",
+        packageMeta: "DELIVERY CONTENTS",
+        packageTitle: "What goes in the folder",
+        packageExecutable: "<code>executavel/</code> — the version's compiled executables, including the compatibility variant.",
         packageSource: "<code>fonte/</code> — corresponding source code.",
-        packageInstructions: "Usage and reproduction instructions.",
-        packageHistory: "Version history.",
-        packageTests: "Tests and evidence.",
-        packageHashes: "Checksums for verification.",
+        packageInstructions: "Instructions for use and for reproducing the build from the source.",
+        packageHistory: "Version history, with the note for each revision.",
+        packageTests: "Tests and evidence: logs, captures, and the revision's build-info.",
+        packageHashes: "Per-file hashes, so the package can be checked against the manifest.",
         calloutImportant: "Important:",
-        calloutText: "source and executables travel together. Splitting them into separate packages only happens upon explicit request.",
+        calloutText: "source and executables travel together in the same version folder. The ZIP is reserved for an explicit request.",
         footerDisclaimer: "Unofficial experimental project. Stardew Valley and its assets belong to their respective owners.",
         backToSite: "Back to the site"
       }
     };
-window.pageTranslations.fr = {"navLabel":"Navigation principale","navHome":"Accueil","navGithub":"GitHub ↗","languageButtonLabel":"Passer à l'anglais","eyebrow":"Documentation · V0.11 R2","title":"Livraison <span>standard</span>","intro":"Chaque version doit être livrée dans <strong>un seul fichier ZIP contenant les exécutables compilés et le code source correspondant</strong>.","docsNavLabel":"Documents","docCoverage":"Couverture R2","docPerf":"Performance","docHistory":"Historique","docDelivery":"Livraison standard","docFeedback":"Feedback","deliveryLabel":"Le paquet","deliveryTitle":"Un ZIP par version","deliveryText":"Les dossiers <code>executavel/</code> et <code>fonte/</code> restent dans le même paquet, accompagnés des instructions, de l'historique de la version, des tests et des hashes. Les paquets ne sont séparés que si l'utilisateur le demande explicitement.","packageMeta":"CONTENU DU PAQUET","packageTitle":"Ce qu'il y a dans le ZIP","packageExecutable":"<code>executavel/</code> — exécutables compilés de la version.","packageSource":"<code>fonte/</code> — code source correspondant.","packageInstructions":"Instructions d'utilisation et de reproduction.","packageHistory":"Historique de la version.","packageTests":"Tests et preuves.","packageHashes":"Hashes de vérification.","calloutImportant":"Important :","calloutText":"source et exécutables voyagent ensemble. La séparation en paquets distincts n'a lieu que sur demande explicite.","footerDisclaimer":"Projet expérimental et non officiel. Stardew Valley et ses ressources appartiennent à leurs titulaires respectifs.","backToSite":"Retour au site","pageTitle":"Livraison standard — Stardew Valley Wii U","pageDescription":"Standard de livraison du laboratoire Stardew Valley pour Wii U : un seul ZIP avec exécutables, source, instructions, historique, tests et hashes."};
-window.pageTranslations.es = {"navLabel":"Navegación principal","navHome":"Inicio","navGithub":"GitHub ↗","languageButtonLabel":"Cambiar a inglés","eyebrow":"Documentación · V0.11 R2","title":"Entrega <span>estándar</span>","intro":"Cada versión debe entregarse en <strong>un único archivo ZIP que contenga los ejecutables compilados y el código fuente correspondiente</strong>.","docsNavLabel":"Documentos","docCoverage":"Cobertura R2","docPerf":"Rendimiento","docHistory":"Historial","docDelivery":"Entrega estándar","docFeedback":"Feedback","deliveryLabel":"El paquete","deliveryTitle":"Un ZIP por versión","deliveryText":"Las carpetas <code>executavel/</code> y <code>fonte/</code> van en el mismo paquete, acompañadas de instrucciones, historial de la versión, pruebas y hashes. Los paquetes solo se separan si el usuario lo pide explícitamente.","packageMeta":"CONTENIDO DEL PAQUETE","packageTitle":"Qué va en el ZIP","packageExecutable":"<code>executavel/</code> — ejecutables compilados de la versión.","packageSource":"<code>fonte/</code> — código fuente correspondiente.","packageInstructions":"Instrucciones de uso y reproducción.","packageHistory":"Historial de la versión.","packageTests":"Pruebas y evidencias.","packageHashes":"Hashes de verificación.","calloutImportant":"Importante:","calloutText":"fuente y ejecutables van juntos. La separación en paquetes distintos solo ocurre mediante pedido explícito.","footerDisclaimer":"Proyecto experimental y no oficial. Stardew Valley y sus recursos pertenecen a sus respectivos titulares.","backToSite":"Volver al sitio","pageTitle":"Entrega estándar — Stardew Valley Wii U","pageDescription":"Estándar de entrega del laboratorio Stardew Valley para Wii U: un único ZIP con ejecutables, fuente, instrucciones, historial, pruebas y hashes."};
+window.pageTranslations.fr = {"pageTitle":"Livraison standard — Stardew Valley Wii U","pageDescription":"Standard de livraison du laboratoire Stardew Valley sur Wii U : un dossier Stardew_WiiU_<version> avec exécutables, source, preuves, instructions, historique, tests et empreintes ; un ZIP seulement sur demande explicite.","navLabel":"Navigation principale","navHome":"Accueil","navGithub":"GitHub ↗","languageButtonLabel":"Passer à l'anglais","eyebrow":"Documentation · standard de livraison","title":"Livraison <span>standard</span>","intro":"Chaque version est livrée dans un dossier <code>Stardew_WiiU_&lt;version&gt;</code> qui réunit <code>executavel/</code>, <code>fonte/</code>, <code>evidencias/</code>, les instructions, l'historique des versions, les résultats de test et les empreintes. La livraison se fait par dossier ; un ZIP n'intervient que sur demande explicite.","docsNavLabel":"Documents","docCoverage":"Couverture R2 (historique)","docCoverageCurrent":"Couverture V0.14 R9","docPerf":"Performance (historique)","docHistory":"Historique","docDelivery":"Livraison standard","docFeedback":"Feedback","deliveryLabel":"Le paquet","deliveryTitle":"Un dossier par version","deliveryText":"La version active se trouve à la racine du projet sous le nom <code>Stardew_WiiU_&lt;version&gt;</code>. Préparez et validez la nouvelle version dans un dossier séparé, vérifiez les fichiers avec le manifeste, déplacez le dossier actif précédent entier dans <code>Versões/</code> et mettez le nouveau dossier à la racine. Les versions archivées ne sont jamais réécrites et une collision de destination se règle avant le déplacement.","packageMeta":"CONTENU DE LA LIVRAISON","packageTitle":"Ce que contient le dossier","packageExecutable":"<code>executavel/</code> — les exécutables compilés de la version, variante de compatibilité incluse.","packageSource":"<code>fonte/</code> — code source correspondant.","packageInstructions":"Instructions d'utilisation et de reproduction depuis la source.","packageHistory":"Historique des versions, avec la note de chaque révision.","packageTests":"Tests et preuves : journaux, captures et le build-info de la révision.","packageHashes":"Empreintes par fichier, pour vérifier le paquet avec le manifeste.","calloutImportant":"Important :","calloutText":"source et exécutables voyagent ensemble, dans le même dossier de version. Le ZIP est réservé à une demande explicite.","footerDisclaimer":"Projet expérimental et non officiel. Stardew Valley et ses ressources appartiennent à leurs titulaires respectifs.","backToSite":"Retour au site"};
+window.pageTranslations.es = {"pageTitle":"Entrega estándar — Stardew Valley Wii U","pageDescription":"Estándar de entrega del laboratorio Stardew Valley para Wii U: una carpeta Stardew_WiiU_<versión> con ejecutables, fuente, evidencias, instrucciones, historial, pruebas y hashes; un ZIP solo bajo petición explícita.","navLabel":"Navegación principal","navHome":"Inicio","navGithub":"GitHub ↗","languageButtonLabel":"Cambiar a inglés","eyebrow":"Documentación · estándar de entrega","title":"Entrega <span>estándar</span>","intro":"Cada versión se entrega en una carpeta <code>Stardew_WiiU_&lt;versión&gt;</code> que reúne <code>executavel/</code>, <code>fonte/</code>, <code>evidencias/</code>, instrucciones, historial, resultados de prueba y hashes. La entrega estándar es por carpeta; un ZIP solo se hace bajo petición explícita.","docsNavLabel":"Documentos","docCoverage":"Cobertura R2 (histórica)","docCoverageCurrent":"Cobertura V0.14 R9","docPerf":"Rendimiento (histórico)","docHistory":"Historial","docDelivery":"Entrega estándar","docFeedback":"Feedback","deliveryLabel":"El paquete","deliveryTitle":"Una carpeta por versión","deliveryText":"La versión activa queda en la raíz del proyecto como <code>Stardew_WiiU_&lt;versión&gt;</code>. Prepara y valida la versión nueva en una carpeta aparte, revisa los archivos con el manifiesto, mueve la carpeta activa anterior entera a <code>Versões/</code> y coloca la nueva en la raíz. Las versiones archivadas no se reescriben y una colisión de destino se resuelve antes de mover.","packageMeta":"CONTENIDO DE LA ENTREGA","packageTitle":"Lo que va en la carpeta","packageExecutable":"<code>executavel/</code> — los ejecutables compilados de la versión, con la variante de compatibilidad.","packageSource":"<code>fonte/</code> — código fuente correspondiente.","packageInstructions":"Instrucciones de uso y de reproducción a partir del fuente.","packageHistory":"Historial de versiones, con la nota de cada revisión.","packageTests":"Pruebas y evidencias: registros, capturas y el build-info de la revisión.","packageHashes":"Hashes por archivo, para verificar el paquete con el manifiesto.","calloutImportant":"Importante:","calloutText":"fuente y ejecutables viajan juntos, en la misma carpeta de versión. El ZIP queda reservado a una petición explícita.","footerDisclaimer":"Proyecto experimental y no oficial. Stardew Valley y sus recursos pertenecen a sus respectivos titulares.","backToSite":"Volver al sitio"};
   </script>
-  <script src="doc-lang.js"></script>
+  <script src="../idioma-pagina.js"></script>
 </body>
 </html>
